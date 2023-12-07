@@ -6,7 +6,7 @@
 /*   By: rihoy <rihoy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 13:58:39 by rihoy             #+#    #+#             */
-/*   Updated: 2023/12/07 12:18:45 by rihoy            ###   ########.fr       */
+/*   Updated: 2023/12/07 16:20:29 by rihoy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 typedef struct s_pile
 {
 	int				num;
-	int				pos;
 	struct s_pile	*next;
 }	t_pile;
 
@@ -50,7 +49,7 @@ int		number_case(t_pile **pile_a);
 /*                             case                                           */
 /* ************************************************************************** */
 void	add_case(t_pile **piler, t_pile *case_last);
-t_pile	*new_case(int content, int pos);
+t_pile	*new_case(int content);
 void	del_case(t_pile *case_curr);
 void	clear_pile(t_pile **pile);
 
