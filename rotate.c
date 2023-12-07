@@ -6,13 +6,13 @@
 /*   By: rihoy <rihoy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 12:51:13 by rihoy             #+#    #+#             */
-/*   Updated: 2023/12/05 14:47:57 by rihoy            ###   ########.fr       */
+/*   Updated: 2023/12/06 16:23:03 by rihoy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lib_push_swap.h"
 
-void	rotate_pile(t_pile **pile)
+void	rota(t_pile **pile)
 {
 	t_pile	*case_curr;
 	t_pile	*last_case;
@@ -30,6 +30,6 @@ void	rotate_pile(t_pile **pile)
 
 void	rotate_all(t_pile **pile_a, t_pile **pile_b)
 {
-	rotate_pile(pile_a);
-	rotate_pile(pile_b);
+	rota(pile_a);
+	rota(pile_b);
 }

@@ -6,20 +6,20 @@
 /*   By: rihoy <rihoy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 14:03:50 by rihoy             #+#    #+#             */
-/*   Updated: 2023/12/06 15:00:33 by rihoy            ###   ########.fr       */
+/*   Updated: 2023/12/07 12:19:16 by rihoy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lib_pusg_swap.h"
+#include "lib_push_swap.h"
 
-int	check_valeur(t_pile **pile_a)
+int	check_value(t_pile **pile_a)
 {
 	t_pile	*curr;
 
 	curr = *pile_a;
 	while (curr->next != NULL && curr != NULL)
 	{
-		if (curr->num < curr->next->num)
+		if (curr->num > curr->next->num)
 			return (0);
 		curr = curr->next;
 	}
@@ -37,7 +37,7 @@ int	same_value(t_pile **pile_a)
 		search = curr->next;
 		while (search != NULL)
 		{
-			if (seach->num == curr->num)
+			if (search->num == curr->num)
 				return (0);
 			search = search->next;
 		}
@@ -64,5 +64,15 @@ int	str_isdigit(const char *str)
 
 int	number_case(t_pile **pile_a)
 {
-	
+	t_pile	*curr;
+	int		i;
+
+	curr = *pile_a;
+	i = 0;
+	while (curr != NULL)
+	{
+		curr = curr->next;
+		i++;
+	}
+	return (i);
 }

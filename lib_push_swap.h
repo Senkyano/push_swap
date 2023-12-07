@@ -6,7 +6,7 @@
 /*   By: rihoy <rihoy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 13:58:39 by rihoy             #+#    #+#             */
-/*   Updated: 2023/12/06 14:02:56 by rihoy            ###   ########.fr       */
+/*   Updated: 2023/12/07 12:18:45 by rihoy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 typedef struct s_pile
 {
 	int				num;
-	int				place;
+	int				pos;
 	struct s_pile	*next;
 }	t_pile;
 
@@ -30,22 +30,35 @@ typedef struct s_donnee
 {
 	int	i;
 	int	j;
+	int	pos;
 	char	**sent;
 }	d_donnee;
 /* ************************************************************************** */
-/*                             MAIN                                           */
+/*                             ALGO                                           */
 /* ************************************************************************** */
-void	print_pile(t_pile **pile);
+void	algo(t_pile **pile_a, t_pile **pile_b, int sizecase);
+
+/* ************************************************************************** */
+/*                             CHECK                                          */
+/* ************************************************************************** */
+int		check_value(t_pile **pile_a);
+int		same_value(t_pile **pile_a);
 int		str_isdigit(const char *str);
-t_pile	**spawn_pile(const char **argv, t_pile **pile);
+int		number_case(t_pile **pile_a);
 
 /* ************************************************************************** */
 /*                             case                                           */
 /* ************************************************************************** */
 void	add_case(t_pile **piler, t_pile *case_last);
-t_pile	*new_case(int content);
+t_pile	*new_case(int content, int pos);
 void	del_case(t_pile *case_curr);
 void	clear_pile(t_pile **pile);
+
+/* ************************************************************************** */
+/*                             CASE2                                          */
+/* ************************************************************************** */
+t_pile	**spawn_pile(const char **argv, t_pile **pile);
+void	print_pile(t_pile **pile);
 
 /* ************************************************************************** */
 /*                             NUMB                                           */
@@ -55,10 +68,15 @@ int		number(const char *str);
 /* ************************************************************************** */
 /*                             SPLIT                                          */
 /* ************************************************************************** */
-int	count_words(const char *str);
+int		count_words(const char *str);
 char	*words(const char *str);
 void	freesplit(char **sent);
 char	**ft_split(const char *str);
+
+/* ************************************************************************** */
+/*                             PUSH                                           */
+/* ************************************************************************** */
+void	push_case(t_pile **pile_curr, t_pile **pile_to);
 
 /* ************************************************************************** */
 /*                             REV_ROTA                                       */
@@ -67,13 +85,13 @@ void	rev_rota(t_pile **pile);
 void	rev_rotall(t_pile **pile_a, t_pile **pile_b);
 
 /* ************************************************************************** */
-/*                             REV_ROTA                                       */
+/*                               ROTA                                         */
 /* ************************************************************************** */
-void	rotate_pile(t_pile **pile);
+void	rota(t_pile **pile);
 void	rotate_all(t_pile **pile_a, t_pile **pile_b);
 
 /* ************************************************************************** */
-/*                             REV_ROTA                                       */
+/*                               SWAP                                         */
 /* ************************************************************************** */
 void	swap_q(t_pile **pile);
 void	swap_s(t_pile **pile_a, t_pile **pile_b);

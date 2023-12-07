@@ -6,7 +6,7 @@
 /*   By: rihoy <rihoy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 09:49:34 by rihoy             #+#    #+#             */
-/*   Updated: 2023/12/04 15:44:49 by rihoy            ###   ########.fr       */
+/*   Updated: 2023/12/06 17:54:18 by rihoy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	del_case(t_pile *case_curr)
 	free(case_curr);
 }
 
-t_pile	*new_case(int	content)
+t_pile	*new_case(int	content, int pos)
 {
 	t_pile		*num;
 
@@ -42,6 +42,7 @@ t_pile	*new_case(int	content)
 	if (!num)
 		return (NULL);
 	num->num = content;
+	num->pos = pos;
 	num->next = NULL;
 	return (num);
 }
