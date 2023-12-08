@@ -12,4 +12,19 @@
 
 #include "lib_push_swap.h"
 
+int	lowest_pos(t_pile **pile_a, int case_b)
+{
+	int	cost;
+	t_pile	**curr;
+
+	curr = *pile_a;
+	cost = 0;
+	while (curr->num < case_b)
+	{
+		curr = curr->next;
+		cost++;
+	}
+	return (number_case(pile_a) - cost);
+}
+
 

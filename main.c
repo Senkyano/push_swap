@@ -25,9 +25,9 @@ int	main(int argc, const char *argv[])
 		return (1);
 	*pile_a = NULL;
 	*pile_b = NULL;
-	pile_a = spawn_pile(argv, pile_a);
+	pile_a = spawn_pile(argv, pile_a, pile_b);
 	if (*pile_a == NULL || !same_value(pile_a))
-		return (errormsg(pile_a, pile_b));
+		errormsg(pile_a, pile_b);
 	algo(pile_a, pile_b, number_case(pile_a));
 	print_pile(pile_a);
 	clear_all(pile_a, pile_b);
@@ -38,7 +38,7 @@ int	errormsg(t_pile **pile_a, t_pile **pile_b)
 {
 	clear_all(pile_a, pile_b);
 	printite("error\n", 0);
-	return (1);
+	exit(1);
 }
 
 void	clear_all(t_pile **pile_a, t_pile **pile_b)

@@ -12,7 +12,7 @@
 
 #include "lib_push_swap.h"
 
-t_pile	**spawn_pile(const char **argv, t_pile **pile)
+t_pile	**spawn_pile(const char **argv, t_pile **pile_a, t_pile **pile_b)
 {
 	d_donnee	in;
 	
@@ -24,13 +24,9 @@ t_pile	**spawn_pile(const char **argv, t_pile **pile)
 		while (in.sent[++in.i] != NULL)
 		{
 			if (str_isdigit(in.sent[in.i]) == 1)
-				add_case(pile, new_case(number(in.sent[in.i])));
+				add_case(pile_a, new_case(number(in.sent[in.i])));
 			else
-			{
-				clear_pile(pile);
-				freesplit(in.sent);
-				return (NULL);
-			}
+				errormsg(pile_a, pile_b);
 		}
 		freesplit(in.sent);
 	}
