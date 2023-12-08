@@ -42,6 +42,7 @@ t_pile	*new_case(int	content)
 	if (!num)
 		return (NULL);
 	num->num = content;
+	num->manip = content;
 	num->pile = 'a';
 	num->next = NULL;
 	return (num);

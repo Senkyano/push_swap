@@ -23,12 +23,37 @@ void	algo(t_pile **pile_a, t_pile **pile_b, int sizecase)
 		swap_q(pile_a);
 	else if (sizecase == 3)
 		while (!check_value(pile_a))
-		three_case(pile_a, pile_b, sizecase);
+			three_case(pile_a);
 	else if (sizecase > 3)
-		return ;
+	{
+		firstlast(pile_a);
+		if (check_value(pile_a))
+			return ;
+		while (number_case(pile_a) != 3)
+			push_case(pile_a, pile_b);
+		algomore(pile_a);
+	}
+	return ;
 }
 
-void	three_case(t_pile **pile_a, t_pile **pile_b, int sizecase)
+void	firstlast(t_pile **pile_a)
+{
+	t_pile	*first;
+	t_pile	*last;
+
+	first = *pile_a;
+	last = first->next;
+	while (last->next != NULL)
+		last = last->next;
+	if (first->num > last->num && last->num > first->next->num)
+		rota(pile_a);
+	else if (first->num > first->next->num && first->num < last->num)
+		swap_q(pile_a);
+	else if (last->num < first->num)
+		rev_rota(pile_a);
+}
+
+void	three_case(t_pile **pile_a)
 {
 	t_pile	*first;
 	t_pile	*sec;
@@ -41,4 +66,10 @@ void	three_case(t_pile **pile_a, t_pile **pile_b, int sizecase)
 		rota(pile_a);
 	else
 		rev_rota(pile_a);
+}
+
+void	algomore(t_pile **pile_a)
+{
+	while (!check_value(pile_a))
+		three_case(pile_a);
 }

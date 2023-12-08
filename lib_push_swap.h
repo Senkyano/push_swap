@@ -22,6 +22,7 @@
 typedef struct s_pile
 {
 	int				num;
+	int				manip;
 	char			pile;
 	struct s_pile	*next;
 }	t_pile;
@@ -37,12 +38,14 @@ typedef struct s_donnee
 void	clear_all(t_pile **pile_a, t_pile **pile_b);
 
 void	printite(char *str, char c);
-
+int	errormsg(t_pile **pile_a, t_pile **pile_b);
 /* ************************************************************************** */
 /*                             ALGO                                           */
 /* ************************************************************************** */
 void	algo(t_pile **pile_a, t_pile **pile_b, int sizecase);
-void	three_case(t_pile **pile_a, t_pile **pile_b, int sizecase);
+void	three_case(t_pile **pile_a);
+void	algomore(t_pile **pile_a);
+void	firstlast(t_pile **pile_a);
 
 /* ************************************************************************** */
 /*                             CHECK                                          */
