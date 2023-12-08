@@ -20,6 +20,7 @@ void	rota(t_pile **pile)
 	case_curr = *pile;
 	last_case = *pile;
 	*pile = case_curr->next;
+	printite("r", case_curr->pile);
 	if (last_case->next == NULL || *pile == NULL)
 		return ;
 	while (last_case->next != NULL)

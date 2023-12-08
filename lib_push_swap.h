@@ -22,6 +22,7 @@
 typedef struct s_pile
 {
 	int				num;
+	char			pile;
 	struct s_pile	*next;
 }	t_pile;
 
@@ -32,10 +33,16 @@ typedef struct s_donnee
 	int	pos;
 	char	**sent;
 }	d_donnee;
+
+void	clear_all(t_pile **pile_a, t_pile **pile_b);
+
+void	printite(char *str, char c);
+
 /* ************************************************************************** */
 /*                             ALGO                                           */
 /* ************************************************************************** */
 void	algo(t_pile **pile_a, t_pile **pile_b, int sizecase);
+void	three_case(t_pile **pile_a, t_pile **pile_b, int sizecase);
 
 /* ************************************************************************** */
 /*                             CHECK                                          */

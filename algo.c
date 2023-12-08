@@ -22,21 +22,23 @@ void	algo(t_pile **pile_a, t_pile **pile_b, int sizecase)
 	else if (sizecase == 2)
 		swap_q(pile_a);
 	else if (sizecase == 3)
-	{
-		if (curr->num > curr->next->num && curr->num < curr->next->next->num)
-			swap_q(pile_a);
-		else if (curr->num < curr->next->num && curr->num > curr->next->next->num)
-			rev_rota(pile_a);
-		else if (curr->num > curr->next->num && curr->num > curr->next->next->num)
-			rota(pile_a);
-	}
+		while (!check_value(pile_a))
+		three_case(pile_a, pile_b, sizecase);
 	else if (sizecase > 3)
 		return ;
 }
 
-// void	algomore(t_pile **pile_a, t_pile **pile_b)
-// {
-// 	if (check_value(pile_a) && number_case(pile_b) == 0)
-// 		return ;
-// 	else if ()
-// }
+void	three_case(t_pile **pile_a, t_pile **pile_b, int sizecase)
+{
+	t_pile	*first;
+	t_pile	*sec;
+
+	first = *pile_a;
+	sec = first->next;
+	if (first->num > sec->num && first->num < sec->next->num)
+		swap_q(pile_a);
+	else if (first->num > sec->next->num && first->num > sec->num)
+		rota(pile_a);
+	else
+		rev_rota(pile_a);
+}

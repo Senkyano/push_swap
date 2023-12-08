@@ -27,6 +27,7 @@ void	rev_rota(t_pile **pile)
 	last_case->next = NULL;
 	first_case->next = *pile;
 	*pile = first_case;
+	printite("rr", first_case->pile);
 }
 
 void	rev_rotall(t_pile **pile_a, t_pile **pile_b)

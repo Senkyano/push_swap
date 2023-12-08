@@ -18,11 +18,13 @@ void	swap_q(t_pile **pile)
 	t_pile	*tmp;
 
 	case_d = *pile;
+	printite("s", case_d->pile);
 	if (case_d->next == NULL || *pile == NULL)
 		return ;
 	tmp = case_d->next;
 	case_d->next = tmp->next;
 	tmp->next = case_d;
+	*pile = tmp;
 }
 
 void	swap_s(t_pile **pile_a, t_pile **pile_b)
