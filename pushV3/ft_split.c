@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lib_push_swap.h"
+#include "push_V3.h"
 
 int	count_words(const char *str)
 {

@@ -10,19 +10,19 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "stack_sp.h"
+#include "push_V3.h"
 
-void	rota(t_stack *tower)
+void	rota(t_stack **tower)
 {
 	t_stack	*first_room;
 	t_stack	*last_room;
 
-	if (tower == NULL)
+	if ((*tower) == NULL)
 		return ;
-	first_room = tower;
-	last_room = tower;
-	tower = tower->next;
-	tower->prev = NULL;
+	first_room = (*tower);
+	last_room = (*tower);
+	(*tower) = (*tower)->next;
+	(*tower)->prev = NULL;
 	while (last_room->next != NULL)
 		last_room = last_room->next;
 	first_room->prev = last_room;
@@ -30,19 +30,19 @@ void	rota(t_stack *tower)
 	last_room->next = first_room;
 }
 
-void	rota_a(t_stack *tower)
+void	rota_a(t_stack **tower)
 {
 	rota(tower);
 	write(1, "ra\n", 3);
 }
 
-void	rota_b(t_stack *tower)
+void	rota_b(t_stack **tower)
 {
 	rota(tower);
 	write(1, "rb\n", 3);
 }
 
-void	rota_all(t_stack *tower_a, t_stack *tower_b)
+void	rota_all(t_stack **tower_a, t_stack **tower_b)
 {
 	rota(tower_a);
 	rota(tower_b);
