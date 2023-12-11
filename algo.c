@@ -3,73 +3,50 @@
 /*                                                        :::      ::::::::   */
 /*   algo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rihoy <rihoy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/06 14:49:32 by rihoy             #+#    #+#             */
-/*   Updated: 2023/12/07 12:04:32 by rihoy            ###   ########.fr       */
+/*   Created: 2023/12/11 15:54:07 by marvin            #+#    #+#             */
+/*   Updated: 2023/12/11 15:54:07 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lib_push_swap.h"
+#include "push_V3.h"
 
-void	algo(t_pile **pile_a, t_pile **pile_b, int sizecase)
+void	three_room(t_stack **tower) // pour gerer si il y a 3 room
 {
-	t_pile	*curr;
+	t_stack	*first;
+	t_stack	*sec;
 
-	curr = *pile_a;
-	if (check_value(pile_a))
-		return ;
-	else if (sizecase == 2)
-		swap_q(pile_a);
-	else if (sizecase == 3)
-		while (!check_value(pile_a))
-			three_case(pile_a);
-	else if (sizecase > 3)
-	{
-		firstlast(pile_a);
-		if (check_value(pile_a))
-			return ;
-		while (number_case(pile_a) != 3)
-			push_case(pile_a, pile_b);
-		algomore(pile_a);
-	}
-	return ;
-}
-
-void	firstlast(t_pile **pile_a)
-{
-	t_pile	*first;
-	t_pile	*last;
-
-	first = *pile_a;
-	last = first->next;
-	while (last->next != NULL)
-		last = last->next;
-	if (first->num > last->num && last->num > first->next->num)
-		rota(pile_a);
-	else if (first->num > first->next->num && first->num < last->num)
-		swap_q(pile_a);
-	else if (last->num < first->num)
-		rev_rota(pile_a);
-}
-
-void	three_case(t_pile **pile_a)
-{
-	t_pile	*first;
-	t_pile	*sec;
-
-	first = *pile_a;
+	first = *tower;
 	sec = first->next;
-	if (first->num > sec->num && first->num < sec->next->num)
-		swap_q(pile_a);
-	else if (first->num > sec->next->num && first->num > sec->num)
-		rota(pile_a);
+	if (first->value > sec->value && first->value < sec->next->value)
+		swap_a(tower);
+	else if (first->value > sec->next->value && first->value > sec->value)
+		rota_a(tower);
 	else
-		rev_rota(pile_a);
+		rev_rota_a(tower);
 }
 
-void	algomore(t_pile **pile_a)
+void	sort_tower(t_stack **tower_a, t_stack **tower_b)
 {
-	while (!check_value(pile_a))
-		three_case(pile_a);
+	int	len_a;
+
+	len_a = tower_len(tower_a);
+	if (len_a-- > 3 && !value_checkeur(*tower_a))
+		push_to_b(tower_a, tower_b);
+	if (len_a-- > 3 && !value_checkeur(*tower_a))
+		push_to_b(tower_a, tower_b);
+	while (len_a-- > 3 && !value_checkeur(*tower_a))
+	{
+		init_room_a(*tower_a, *tower_b);
+		move_a_to_b(tower_a, tower_b);
+	}
+	three_room(tower_a);
+	while (*tower_b)
+	{
+		init_room_b(*tower_a, *tower_b);
+		move_b_to_a(tower_a, tower_b);
+	}
+	curr_index(*tower_a);
+	min_on_top(tower_a);
 }
