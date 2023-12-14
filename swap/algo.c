@@ -6,7 +6,7 @@
 /*   By: rihoy <rihoy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 11:26:05 by rihoy             #+#    #+#             */
-/*   Updated: 2023/12/13 17:25:04 by rihoy            ###   ########.fr       */
+/*   Updated: 2023/12/14 18:34:24 by rihoy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	three_for_a(t_stack **a, t_stack **b)
 
 	while (nbr_box(a) > 3)
 	{
-		mid = mid_pos(a);
+		mid = 
 		while (nbr_box(a) > 3 && hightest(a, mid) == 0)
 		{
 			if ((*a)->nbr < mid->nbr)

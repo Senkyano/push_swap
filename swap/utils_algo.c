@@ -6,51 +6,64 @@
 /*   By: rihoy <rihoy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 14:46:30 by rihoy             #+#    #+#             */
-/*   Updated: 2023/12/13 20:04:46 by rihoy            ###   ########.fr       */
+/*   Updated: 2023/12/14 18:42:05 by rihoy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "swaplib.h"
 
-void	tab_ref(t_stack **a)
+t_ref	*tab_reference(t_stack **a)
 {
-	t_stack	*min;
+	t_ref	ref;
 	t_stack	*curr;
-	t_stack	*tmp;
-	
+	t_data	ind;
+
+	ref.size = nbr_box(a);
+	ref.tab = malloc(sizeof(int) * ref.size);
+	if (!ref)
+		return (-1);
+	ind.i = 0;
 	curr = *a;
-	min = *a;
-	tmp = NULL;
-	while (trie)
+	while (curr && ind.i < ref.size)
 	{
-		curr = *a;
-		while (curr)
-		{
-			if (curr->nbr < min->nbr)
-				min = curr;
-			curr = curr->next;
-		}
-		if (!tmp)
-			tmp = min;
-		tmp->ref = min;
-		tmp = tmp->ref;
+		ref.tab[ind.i++] = curr->nbr;
+		curr = curr->next;
 	}
-	
+	return (ref);
 }
 
-t_stack	*mid_pos(t_stack **a)
+t_ref	sort_ref(t_ref ref)
 {
-	int median;
-	t_stack	*mid;
-
-	mid = *a;
-	median = nbr_box(a) / 2;
-	while (median)
+	t_data	*ind;
+	
+	ind.i = 0;
+	while (i < ref.size - 1)
 	{
-		mid = mid->next;
-		median--;
+		if (ref.tab[ind.i] > ref.tab[ind.i + 1])
+		{
+			ind.j = ref.tab[j];
+			ref.tab[ind.i] = ref.tab[ind.i + 1];
+			ref.tab[ind.i + 1] = ind.j;
+			ref = sort(ref);
+		}
+		ind.i++;
 	}
-	return (mid);
+	return (ref);
+}
+
+t_stack	*mid_pos_ref(t_stack **a, t_ref ref)
+{
+	int	i;
+	t_stack	*curr;
+
+	curr = *a;
+	while (curr)
+	{
+		if (curr->nbr == ref.tab[size / 2])
+			return (curr);
+		curr = curr->next;
+	}
+	return (curr);
 }
 
 bool	hightest(t_stack **a, t_stack *mid)
