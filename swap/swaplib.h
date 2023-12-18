@@ -6,7 +6,7 @@
 /*   By: rihoy <rihoy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 10:28:34 by rihoy             #+#    #+#             */
-/*   Updated: 2023/12/14 18:25:44 by rihoy            ###   ########.fr       */
+/*   Updated: 2023/12/18 17:53:09 by rihoy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ typedef struct s_stack
 {
 	int	nbr;
 	int	index;
-	struct s_stack	*ref;
 	struct s_stack	*prev;
 	struct s_stack	*next;
 }	t_stack;
@@ -70,11 +69,13 @@ typedef	struct	s_ref
 	int	size;
 }	t_ref;
 t_ref		sort_ref(t_ref ref);
-t_ref		*tab_reference(t_stack **a);
+t_ref		tab_reference(t_stack **a);
+t_stack		*mid_pos_ref(t_stack **a, t_ref ref);
 /* ************************************************************************** */
 
 // ERROR
 void		error_exit(t_stack **a);
+void		error_algo(t_stack	**a, t_stack **b);
 bool		same_value(t_stack **a);
 bool		onlydigit(char *str);
 // SPLIT
@@ -88,9 +89,9 @@ void		print_stack(t_stack **a);
 bool		trie_ok(t_stack **a);
 int			nbr_box(t_stack **a);
 // ALGO
+void		sort_mid(t_stack **a, t_stack **b);
 void		sort_three(t_stack **a);
-void		more_than_three(t_stack **a, t_stack **b);
-void		three_for_a(t_stack **a, t_stack **b);
+int			chunk_creator(t_stack **a, t_stack **b, t_ref ref, int i);
 // UTILS ALGO
 bool		hightest(t_stack **a, t_stack *mid);
 

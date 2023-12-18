@@ -6,7 +6,7 @@
 /*   By: rihoy <rihoy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 10:32:41 by rihoy             #+#    #+#             */
-/*   Updated: 2023/12/13 17:05:47 by rihoy            ###   ########.fr       */
+/*   Updated: 2023/12/18 11:07:55 by rihoy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,14 @@
 void	error_exit(t_stack **a)
 {
 	free_stack(a);
+	write(1, "Error\n", 6);
+	exit(1);
+}
+
+void	error_algo(t_stack	**a, t_stack **b)
+{
+	free_stack(a);
+	free_stack(b);
 	write(1, "Error\n", 6);
 	exit(1);
 }

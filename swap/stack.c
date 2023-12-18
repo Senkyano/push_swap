@@ -6,7 +6,7 @@
 /*   By: rihoy <rihoy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 10:34:41 by rihoy             #+#    #+#             */
-/*   Updated: 2023/12/13 18:29:06 by rihoy            ###   ########.fr       */
+/*   Updated: 2023/12/18 11:14:16 by rihoy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ t_stack	*box(int value)
 		return (NULL);
 	box->nbr = value;
 	box->next = NULL;
-	box->ref = NULL;
 	box->prev = NULL;
 	return (box);
 }

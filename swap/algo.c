@@ -6,7 +6,7 @@
 /*   By: rihoy <rihoy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 11:26:05 by rihoy             #+#    #+#             */
-/*   Updated: 2023/12/14 18:34:24 by rihoy            ###   ########.fr       */
+/*   Updated: 2023/12/18 18:24:42 by rihoy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,25 +31,43 @@ void	sort_three(t_stack **a)
 		sort_three(a);
 }
 
-void	more_than_three(t_stack **a, t_stack **b)
-{
-	three_for_a(a, b);
-}
-
-void	three_for_a(t_stack **a, t_stack **b)
+void	sort_mid(t_stack **a, t_stack **b)
 {
 	t_stack	*mid;
+	t_ref	ref;
+	int		i;
 
 	while (nbr_box(a) > 3)
 	{
-		mid = 
+		i = 0;
+		ref = sort_ref(tab_reference(a));
+		if (!ref.tab)
+			error_algo(a, b);
+		mid = mid_pos_ref(a, ref);
 		while (nbr_box(a) > 3 && hightest(a, mid) == 0)
 		{
 			if ((*a)->nbr < mid->nbr)
-				push_to_b(a, b);
+				i = chunk_creator(a, b, ref, i);
 			else
 				rota_a(a);
 		}
+		while (i-- > 0)
+			rev_rota_b(b);
+		free(ref.tab);
 	}
 	sort_three(a);
+}
+
+int	chunk_creator(t_stack **a, t_stack **b, t_ref ref, int i)
+{
+	t_stack	*curr;
+
+	push_to_b(a,b);
+	curr = *b;
+	if (curr->nbr > ref.tab[ref.size / 4] && nbr_box(b) != 1)
+	{
+		rota_b(b);
+		i++;
+	}
+	return (i);
 }

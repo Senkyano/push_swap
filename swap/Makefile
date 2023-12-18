@@ -6,7 +6,7 @@
 #    By: rihoy <rihoy@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/13 12:22:19 by rihoy             #+#    #+#              #
-#    Updated: 2023/12/13 15:44:36 by rihoy            ###   ########.fr        #
+#    Updated: 2023/12/18 18:14:16 by rihoy            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ OBJS = ${SRCS:.c=.o}
 
 NAME = push_swap
 CC = cc
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra -g3
 RM = rm -f
 
 all : ${NAME}

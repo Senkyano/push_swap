@@ -1,0 +1,9 @@
+Obtenir le cout de chacune des elements pour ensuite faire le meilleurs 
+Si ra < rra = ra
+Si ra > rra = rra
+Si rb < rrb = rb
+Si rb > rrb = rrb
+
+Si le 1er element plus grand que le second elements de la pile a = sa
+Si le 1er element plus petit que le second elements de la pile b = sb
+Si les 2 conditions sont remplis = ss
