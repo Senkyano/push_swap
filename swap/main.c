@@ -6,7 +6,7 @@
 /*   By: rihoy <rihoy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 10:28:22 by rihoy             #+#    #+#             */
-/*   Updated: 2023/12/18 17:15:55 by rihoy            ###   ########.fr       */
+/*   Updated: 2023/12/20 10:18:35 by rihoy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	main(int argc, const char *argv[])
 		else if (nbr_box(&a) == 3)
 			sort_three(&a);
 		else if (nbr_box(&a) > 3)
-			sort_mid(&a, &b);
+			sort_more(&a, &b);
 	}
 	free_stack(&b);
 	free_stack(&a);

@@ -6,7 +6,7 @@
 /*   By: rihoy <rihoy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 10:34:41 by rihoy             #+#    #+#             */
-/*   Updated: 2023/12/18 11:14:16 by rihoy            ###   ########.fr       */
+/*   Updated: 2023/12/20 13:15:37 by rihoy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void	print_stack(t_stack **a)
 	curr = *a;
 	while (curr)
 	{
-		printf("%d ", curr->nbr);
+		printf("%d \n", curr->nbr);
 		curr = curr->next;
 	}
 }

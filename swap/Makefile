@@ -6,13 +6,14 @@
 #    By: rihoy <rihoy@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/13 12:22:19 by rihoy             #+#    #+#              #
-#    Updated: 2023/12/18 18:14:16 by rihoy            ###   ########.fr        #
+#    Updated: 2023/12/20 09:39:02 by rihoy            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS =	move/push.c move/rev_rota.c move/rota.c move/swap.c \
 		algo.c error_usage.c ft_split.c main.c \
-		stack.c utils_algo.c utils_swap.c
+		stack.c utils_algo.c utils_swap.c \
+		cmp_cost.c cost_op.c do_op.c
 
 OBJS = ${SRCS:.c=.o}
 

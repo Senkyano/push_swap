@@ -6,7 +6,7 @@
 /*   By: rihoy <rihoy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 14:46:30 by rihoy             #+#    #+#             */
-/*   Updated: 2023/12/18 18:24:53 by rihoy            ###   ########.fr       */
+/*   Updated: 2023/12/20 15:53:08 by rihoy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_ref	tab_reference(t_stack **a)
 t_ref	sort_ref(t_ref ref)
 {
 	t_data	ind;
-	
+
 	ind.i = 0;
 	if (!ref.tab)
 		return (ref);
@@ -79,4 +79,26 @@ bool	hightest(t_stack **a, t_stack *mid)
 		curr = curr->next;
 	}
 	return (1);
+}
+
+t_data min_value(t_stack **a)
+{
+	t_stack	*curr;
+	t_data	min;
+
+	curr = *a;
+	min.box = *a;
+	min.j = 0;
+	min.i  = 0;
+	while (curr != NULL)
+	{
+		if (curr->nbr < min.box->nbr)
+		{
+			min.box = curr;
+			min.i = min.j;
+		}
+		curr = curr->next;
+		min.j++;
+	}
+	return (min);
 }

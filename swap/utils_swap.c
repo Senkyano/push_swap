@@ -6,7 +6,7 @@
 /*   By: rihoy <rihoy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 11:01:40 by rihoy             #+#    #+#             */
-/*   Updated: 2023/12/13 14:16:40 by rihoy            ###   ########.fr       */
+/*   Updated: 2023/12/20 08:47:50 by rihoy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ bool	trie_ok(t_stack **a)
 int	nbr_box(t_stack **a)
 {
 	t_stack	*curr;
-	int	i;
+	int		i;
 
 	curr = *a;
 	i = 0;

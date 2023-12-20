@@ -6,7 +6,7 @@
 /*   By: rihoy <rihoy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 10:28:34 by rihoy             #+#    #+#             */
-/*   Updated: 2023/12/18 17:53:09 by rihoy            ###   ########.fr       */
+/*   Updated: 2023/12/20 14:01:52 by rihoy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@
 typedef struct s_stack
 {
 	int	nbr;
-	int	index;
 	struct s_stack	*prev;
 	struct s_stack	*next;
 }	t_stack;
@@ -56,6 +55,12 @@ typedef	struct s_data
 {
 	int		i;
 	int		j;
+	int		cost;
+	int		min_cost;
+	int		cost_ra;
+	int		cost_rb;
+	int		cost_rra;
+	int		cost_rrb;
 	t_stack	*box;
 	char	**sent;
 }	t_data;
@@ -91,6 +96,7 @@ int			nbr_box(t_stack **a);
 // ALGO
 void		sort_mid(t_stack **a, t_stack **b);
 void		sort_three(t_stack **a);
+void		sort_more(t_stack **a, t_stack **b);
 int			chunk_creator(t_stack **a, t_stack **b, t_ref ref, int i);
 // UTILS ALGO
 bool		hightest(t_stack **a, t_stack *mid);

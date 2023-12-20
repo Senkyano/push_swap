@@ -6,7 +6,7 @@
 /*   By: rihoy <rihoy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 11:26:05 by rihoy             #+#    #+#             */
-/*   Updated: 2023/12/18 18:24:42 by rihoy            ###   ########.fr       */
+/*   Updated: 2023/12/20 14:02:39 by rihoy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	chunk_creator(t_stack **a, t_stack **b, t_ref ref, int i)
 {
 	t_stack	*curr;
 
-	push_to_b(a,b);
+	push_to_b(a, b);
 	curr = *b;
 	if (curr->nbr > ref.tab[ref.size / 4] && nbr_box(b) != 1)
 	{
@@ -70,4 +70,9 @@ int	chunk_creator(t_stack **a, t_stack **b, t_ref ref, int i)
 		i++;
 	}
 	return (i);
+}
+
+void	sort_more(t_stack **a, t_stack **b)
+{
+	sort_mid(a, b);
 }

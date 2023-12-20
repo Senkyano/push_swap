@@ -6,16 +6,13 @@
 /*   By: rihoy <rihoy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 13:24:42 by rihoy             #+#    #+#             */
-/*   Updated: 2023/12/18 13:35:00 by rihoy            ###   ########.fr       */
+/*   Updated: 2023/12/20 16:44:04 by rihoy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	best_cost(t_stack **a, t_stack **b)
-{
-	
-}
+#include "swaplib.h"
 
-int	find_cost(t_stack **a, t_stack **b)
+int	best_cost(int , int , int , int )
 {
 	
 }

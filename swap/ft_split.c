@@ -31,7 +31,7 @@ int	count_words(const char *str)
 
 char	*words(const char *str)
 {
-	int	i;
+	int		i;
 	char	*word;
 
 	i = 0;
