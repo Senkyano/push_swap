@@ -6,7 +6,7 @@
 /*   By: rihoy <rihoy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 11:26:05 by rihoy             #+#    #+#             */
-/*   Updated: 2023/12/20 14:02:39 by rihoy            ###   ########.fr       */
+/*   Updated: 2023/12/20 19:47:02 by rihoy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,34 @@ int	chunk_creator(t_stack **a, t_stack **b, t_ref ref, int i)
 
 void	sort_more(t_stack **a, t_stack **b)
 {
+	int		i;
+	t_stack	*curr;
+
 	sort_mid(a, b);
+	printf("\n");
+	curr = *b;
+	while (*b != NULL)
+	{
+		curr = *b;
+		print_stack(a);
+		printf("\n");
+		print_stack(b);
+		while (curr != NULL)
+		{
+			i = cost_rra(a, curr);
+			printf("%d, ", i);
+			curr = curr->next;
+		}
+		printf("\n");
+		curr = *b;
+		while (curr != NULL)
+		{
+			i = cost_rrb(b, curr);
+			printf("%d ,",i);
+			curr = curr->next;
+		}
+		printf("\n");
+		push_to_a(b, a);
+	}
+	print_stack(a);
 }

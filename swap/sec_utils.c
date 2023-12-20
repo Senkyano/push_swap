@@ -1,18 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmp_cost.c                                         :+:      :+:    :+:   */
+/*   sec_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rihoy <rihoy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/18 13:24:42 by rihoy             #+#    #+#             */
-/*   Updated: 2023/12/20 18:42:14 by rihoy            ###   ########.fr       */
+/*   Created: 2023/12/20 17:35:15 by rihoy             #+#    #+#             */
+/*   Updated: 2023/12/20 19:44:32 by rihoy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "swaplib.h"
 
-// int	best_cost(int , int , int , int )
-// {
-	
-// }
+int	front_back(int back, int here, int front)
+{
+	if (!(back < here && front > here))
+		return (1);
+	return (0);
+}
+
+int	back_front(int back, int here, int front)
+{
+	if (!(back > here && front < here))
+		return (1);
+	return (0);
+}

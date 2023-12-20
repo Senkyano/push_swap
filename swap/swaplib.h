@@ -6,7 +6,7 @@
 /*   By: rihoy <rihoy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 10:28:34 by rihoy             #+#    #+#             */
-/*   Updated: 2023/12/20 14:01:52 by rihoy            ###   ########.fr       */
+/*   Updated: 2023/12/20 18:43:23 by rihoy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,5 +100,14 @@ void		sort_more(t_stack **a, t_stack **b);
 int			chunk_creator(t_stack **a, t_stack **b, t_ref ref, int i);
 // UTILS ALGO
 bool		hightest(t_stack **a, t_stack *mid);
+t_data min_value(t_stack **a);
+int	back_front(int back, int here, int front);
+int	front_back(int back, int here, int front);
+// COST_OP
+t_stack	*last_box(t_stack **b);
+int	cost_ra(t_stack **a, t_stack *btw);
+int	cost_rra(t_stack **a, t_stack *btw);
+int	cost_rb(t_stack **b, t_stack *srch);
+int	cost_rrb(t_stack **b, t_stack *srch);
 
 #endif

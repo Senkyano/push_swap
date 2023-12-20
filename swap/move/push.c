@@ -17,7 +17,7 @@ void	push_to_a(t_stack **from, t_stack **to)
 	t_stack *first_room;
 
 	write(1, "pa\n", 3);
-	if (!(*to))
+	if (!(*to) )
 	{
 		(*to) = *from;
 		(*from) = (*from)->next;
@@ -27,7 +27,8 @@ void	push_to_a(t_stack **from, t_stack **to)
 	}
 	first_room = (*from);
 	(*from) = (*from)->next;
-	(*from)->prev = NULL;
+	if ((*from) != NULL)
+		(*from)->prev = NULL;
 	first_room->next = (*to);
 	(*to)->prev = first_room;
 	(*to) = first_room;
@@ -48,7 +49,8 @@ void	push_to_b(t_stack **from, t_stack **to)
 	}
 	first_room = (*from);
 	(*from) = (*from)->next;
-	(*from)->prev = NULL;
+	if ((*from) != NULL)
+		(*from)->prev = NULL;
 	first_room->next = (*to);
 	(*to)->prev = first_room;
 	(*to) = first_room;
