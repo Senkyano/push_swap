@@ -6,7 +6,7 @@
 /*   By: rihoy <rihoy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 10:28:34 by rihoy             #+#    #+#             */
-/*   Updated: 2023/12/20 18:43:23 by rihoy            ###   ########.fr       */
+/*   Updated: 2023/12/21 11:38:37 by rihoy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,5 +109,15 @@ int	cost_ra(t_stack **a, t_stack *btw);
 int	cost_rra(t_stack **a, t_stack *btw);
 int	cost_rb(t_stack **b, t_stack *srch);
 int	cost_rrb(t_stack **b, t_stack *srch);
+// DO_OP
+void	do_rr(t_stack **a, t_stack **b, int ra, int rb);
+void	do_ra_rrb(t_stack **a, t_stack **b, int ra, int rrb);
+void	do_rra_rb(t_stack **a, t_stack **b, int rra, int rb);
+void	do_rrr(t_stack **a, t_stack **b, int rra, int rrb);
+void	do_best_cost(t_stack **a, t_stack **b, t_stack *srch);	
+// CMP_COST
+int	cost_way(t_stack **a, t_stack **b, t_stack *srch);
+int	best_way(int ra, int rb, int rra, int rrb);
+void	print_stack_rev(t_stack **a);
 
 #endif

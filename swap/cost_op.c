@@ -6,7 +6,7 @@
 /*   By: rihoy <rihoy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 14:14:29 by rihoy             #+#    #+#             */
-/*   Updated: 2023/12/20 19:47:41 by rihoy            ###   ########.fr       */
+/*   Updated: 2023/12/21 16:08:07 by rihoy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	cost_ra(t_stack **a, t_stack *btw)
 		i = 0;
 		back = last_box(a);
 		front = *a;
-		printf("front %d, btw %d, back %d\n", front->nbr, btw->nbr, back->nbr);
+		// printf("front %d, btw %d, back %d\n", front->nbr, btw->nbr, back->nbr);
 		while (front_back(front->nbr, btw->nbr, back->nbr) == 0)
 		{
 			back = back->next;
@@ -62,7 +62,7 @@ int	cost_rra(t_stack **a, t_stack *btw)
 	min = min_value(a);
 	if (min.box->nbr > btw->nbr)
 	{
-		printf("min %d ", min.i);
+		// printf("min %d ", min.i);
 		return (min.i);
 	}
 	else
@@ -70,7 +70,7 @@ int	cost_rra(t_stack **a, t_stack *btw)
 		i = 0;
 		back = *a;
 		front = last_box(a);
-		printf("front %d, btw %d, back %d\n", front->nbr, btw->nbr, back->nbr);
+		// printf("front %d, btw %d, back %d\n", front->nbr, btw->nbr, back->nbr);
 		while (back_front(back->nbr, btw->nbr, front->nbr))
 		{
 			back = back->prev;

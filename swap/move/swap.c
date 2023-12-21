@@ -14,18 +14,22 @@
 
 void	swap(t_stack **box)
 {
-	t_stack	*first_box;
-	t_stack	*tmp;
+	t_stack	*first;
+	t_stack	*sec;
+	t_stack	*third;
 
 	if ((*box) == NULL)
 		return ;
-	first_box = (*box);
-	tmp = (*box)->next;
-	first_box->next = tmp->next;
-	first_box->prev = tmp;
-	tmp->next = first_box;
-	tmp->prev = NULL;
-	(*box) = tmp;
+	first = *box;
+	sec = first->next;
+	third = sec->next;
+	if (third != NULL)
+		third->prev = first;
+	first->next = third;
+	first->prev = sec;
+	sec->next = first;
+	sec->prev = NULL;
+	(*box) = sec;
 }
 
 void	swap_a(t_stack **box)

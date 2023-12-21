@@ -17,7 +17,7 @@ void	push_to_a(t_stack **from, t_stack **to)
 	t_stack *first_room;
 
 	write(1, "pa\n", 3);
-	if (!(*to) )
+	if (!(*to))
 	{
 		(*to) = *from;
 		(*from) = (*from)->next;

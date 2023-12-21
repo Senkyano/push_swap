@@ -6,7 +6,7 @@
 /*   By: rihoy <rihoy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 11:26:05 by rihoy             #+#    #+#             */
-/*   Updated: 2023/12/20 19:47:02 by rihoy            ###   ########.fr       */
+/*   Updated: 2023/12/21 16:23:51 by rihoy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	sort_mid(t_stack **a, t_stack **b)
 		mid = mid_pos_ref(a, ref);
 		while (nbr_box(a) > 3 && hightest(a, mid) == 0)
 		{
-			if ((*a)->nbr < mid->nbr)
+			if ((*a)->nbr <= mid->nbr)
 				i = chunk_creator(a, b, ref, i);
 			else
 				rota_a(a);
@@ -60,11 +60,8 @@ void	sort_mid(t_stack **a, t_stack **b)
 
 int	chunk_creator(t_stack **a, t_stack **b, t_ref ref, int i)
 {
-	t_stack	*curr;
-
 	push_to_b(a, b);
-	curr = *b;
-	if (curr->nbr > ref.tab[ref.size / 4] && nbr_box(b) != 1)
+	if ((*b)->nbr > ref.tab[ref.size / 4] && nbr_box(b) != 1)
 	{
 		rota_b(b);
 		i++;
@@ -74,34 +71,17 @@ int	chunk_creator(t_stack **a, t_stack **b, t_ref ref, int i)
 
 void	sort_more(t_stack **a, t_stack **b)
 {
-	int		i;
+	sort_mid(a, b);
+}
+
+void	print_stack_rev(t_stack **a)
+{
 	t_stack	*curr;
 
-	sort_mid(a, b);
-	printf("\n");
-	curr = *b;
-	while (*b != NULL)
+	curr = last_box(a);
+	while (curr)
 	{
-		curr = *b;
-		print_stack(a);
-		printf("\n");
-		print_stack(b);
-		while (curr != NULL)
-		{
-			i = cost_rra(a, curr);
-			printf("%d, ", i);
-			curr = curr->next;
-		}
-		printf("\n");
-		curr = *b;
-		while (curr != NULL)
-		{
-			i = cost_rrb(b, curr);
-			printf("%d ,",i);
-			curr = curr->next;
-		}
-		printf("\n");
-		push_to_a(b, a);
+		printf("%d ", curr->nbr);
+		curr = curr->prev;
 	}
-	print_stack(a);
 }

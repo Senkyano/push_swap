@@ -17,17 +17,17 @@ void	rev_rota(t_stack **box)
 	t_stack *first_box;
 	t_stack	*last_box;
 
-	if ((*box)->next == NULL)
+	if ((*box)->next == NULL || (*box) == NULL)
 		return ;
-	first_box = (*box);
-	last_box = (*box);
-	while (last_box->next != NULL)
-		last_box = last_box->next;
-	last_box->next = first_box;
-	first_box->prev = last_box;
-	last_box->prev->next = NULL;
-	last_box->prev = NULL;
-	(*box) = last_box;
+	first_box = *box;
+	while (first_box->next != NULL)
+		first_box = first_box->next;
+	last_box = first_box->prev;
+	last_box->next = NULL;
+	first_box->next = (*box);
+	first_box->prev = NULL;
+	(*box)->prev = first_box;
+	(*box) = first_box;
 }
 
 void	rev_rota_a(t_stack **box)
