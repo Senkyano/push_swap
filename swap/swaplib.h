@@ -6,13 +6,14 @@
 /*   By: rihoy <rihoy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 10:28:34 by rihoy             #+#    #+#             */
-/*   Updated: 2023/12/21 11:38:37 by rihoy            ###   ########.fr       */
+/*   Updated: 2023/12/26 18:02:07 by rihoy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SWAPLIB_H
 # define SWAPLIB_H
 
+#include <math.h>
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
@@ -24,6 +25,7 @@
 typedef struct s_stack
 {
 	int	nbr;
+	int	stack;
 	struct s_stack	*prev;
 	struct s_stack	*next;
 }	t_stack;
@@ -55,8 +57,11 @@ typedef	struct s_data
 {
 	int		i;
 	int		j;
-	int		cost;
-	int		min_cost;
+	int		size;
+	int		inception;
+
+///////
+
 	int		cost_ra;
 	int		cost_rb;
 	int		cost_rra;
@@ -72,6 +77,7 @@ typedef	struct	s_ref
 {
 	int	*tab;
 	int	size;
+	int	newsize;
 }	t_ref;
 t_ref		sort_ref(t_ref ref);
 t_ref		tab_reference(t_stack **a);
@@ -93,31 +99,63 @@ int			ft_atoi(char *str, t_stack **a, char **sent);
 void		print_stack(t_stack **a);
 bool		trie_ok(t_stack **a);
 int			nbr_box(t_stack **a);
+int	min_half(t_stack **a, int half);
 // ALGO
-void		sort_mid(t_stack **a, t_stack **b);
 void		sort_three(t_stack **a);
-void		sort_more(t_stack **a, t_stack **b);
-int			chunk_creator(t_stack **a, t_stack **b, t_ref ref, int i);
+void	send_mid(t_stack **a, t_stack **b);
+void	sort_algo(t_stack **a, t_stack **b);
+int	chunk_creator(t_stack **a, t_stack **b, t_ref ref, int i);
+
+
+///////
+
+
+void	half_part(t_stack **a, t_stack **b, t_data data);
+t_data	separator_b(t_stack **a, t_stack **b, t_ref ref, t_data data);
+void	smart_push(t_stack **a, t_stack **b);
+t_ref	mk_ref(t_stack **a, t_stack **b, int size);
+void	print_ref(t_ref ref);
+void	mk_tab(t_stack **a, t_stack **b);
+
+////////
+
+void	sission(t_stack **a, t_stack **b, t_ref ref, int inception, int decoupe);
+int	sec_power(int n, int nbr);
+int	chunk(t_stack **a, t_stack **b, t_ref ref, int decoupe, int half);
+
+///////////
+
+void	dissection(t_stack **a, t_stack **b, t_ref ref, t_data data);
+int	ind_half(t_ref ref, int ind);
+int	chunk_diss(t_stack **a, t_stack **b, t_ref ref, int i, int rev);
+
 // UTILS ALGO
 bool		hightest(t_stack **a, t_stack *mid);
-t_data min_value(t_stack **a);
-int	back_front(int back, int here, int front);
-int	front_back(int back, int here, int front);
-// COST_OP
+void	print_tab(t_ref ref);
+void	print_stack_half(t_stack **a, int size);
+
+
+
+//
+
+
+int	best_way(int ra, int rb, int rra, int rrb);
+int	cost_way(t_stack **a, t_stack **b, t_stack *srch);
+
 t_stack	*last_box(t_stack **b);
 int	cost_ra(t_stack **a, t_stack *btw);
 int	cost_rra(t_stack **a, t_stack *btw);
 int	cost_rb(t_stack **b, t_stack *srch);
 int	cost_rrb(t_stack **b, t_stack *srch);
-// DO_OP
+
 void	do_rr(t_stack **a, t_stack **b, int ra, int rb);
 void	do_ra_rrb(t_stack **a, t_stack **b, int ra, int rrb);
 void	do_rra_rb(t_stack **a, t_stack **b, int rra, int rb);
 void	do_rrr(t_stack **a, t_stack **b, int rra, int rrb);
-void	do_best_cost(t_stack **a, t_stack **b, t_stack *srch);	
-// CMP_COST
-int	cost_way(t_stack **a, t_stack **b, t_stack *srch);
-int	best_way(int ra, int rb, int rra, int rrb);
-void	print_stack_rev(t_stack **a);
+void	do_best_cost(t_stack **a, t_stack **b, t_stack *srch);
+
+int	min_val(t_stack **box);
+int	min_ind(t_stack	**box);
+int	min_ind_last(t_stack **box);
 
 #endif
