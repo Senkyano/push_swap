@@ -3,34 +3,63 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rihoy <rihoy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/09 20:36:56 by marvin            #+#    #+#             */
-/*   Updated: 2023/12/09 20:36:56 by marvin           ###   ########.fr       */
+/*   Created: 2023/12/13 10:28:22 by rihoy             #+#    #+#             */
+/*   Updated: 2023/12/30 15:33:30 by rihoy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_V3.h"
+#include "swaplib.h"
+
+// faire un tab de ref deja trie
 
 int	main(int argc, const char *argv[])
 {
-	t_stack	*tower_a;
-	t_stack	*tower_b;
+	t_stack	*a;
+	t_stack	*b;
+	t_data	data;
+	t_ref	ref;
 
-	tower_a = NULL;
-	tower_b = NULL;
 	if (argc < 2)
 		return (1);
-	build_in(argv, &tower_a, &tower_b); // construire la tour
-	if (!value_checkeur(tower_a)) // regarder si c'est tout bon
+	a = NULL;
+	b = NULL;
+	build_in(&a, argv);
+	if (same_value(&a))
+		error_exit(&a);
+	data.i = 0;
+	data.inception = 0;
+	ref = order_tab(&a);
+	ref.end_taff = 0;
+	if (!trie_ok(&a))
 	{
-		if (tower_len(tower_a) == 2) // regarde si on as que 2 room
-			swap(tower_a);
-		else if (tower_len(tower_a) == 3) // regarde si on as que 3 room
-			three_room(tower_a);
-		else // si on as plus que 3 room
-			sort_tower(a, b);
+		if (nbr_box(&a) == 2)
+			swap_pile(&a);
+		else if (nbr_box(&a) == 3)
+			sort_three(&a);
+		else if (nbr_box(&a) > 3)
+			dissection(&a, &b, ref, data);
 	}
-	clear_tower(tower_a); // nettoyer la tour ou detruire la tour
+	free_all(&a, &b, ref);
 	return (0);
+}
+
+// void	printab(t_ref ref)
+// {
+// 	int	i;
+
+// 	i = 0;
+// 	while (i < ref.size)
+// 	{
+// 		printf("%d \n", ref.tab[i]);
+// 		i++;
+// 	}
+// }
+
+void	free_all(t_stack **a, t_stack **b, t_ref ref)
+{
+	free_stack(a);
+	free_stack(b);
+	free(ref.tab);
 }

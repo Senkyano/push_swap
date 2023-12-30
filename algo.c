@@ -3,50 +3,145 @@
 /*                                                        :::      ::::::::   */
 /*   algo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rihoy <rihoy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/11 15:54:07 by marvin            #+#    #+#             */
-/*   Updated: 2023/12/11 15:54:07 by marvin           ###   ########.fr       */
+/*   Created: 2023/12/13 11:26:05 by rihoy             #+#    #+#             */
+/*   Updated: 2023/12/30 17:55:51 by rihoy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_V3.h"
+#include "swaplib.h"
 
-void	three_room(t_stack **tower) // pour gerer si il y a 3 room
+void	sort_three(t_stack **a)
 {
-	t_stack	*first;
 	t_stack	*sec;
+	t_stack	*fst;
 
-	first = *tower;
-	sec = first->next;
-	if (first->value > sec->value && first->value < sec->next->value)
-		swap_a(tower);
-	else if (first->value > sec->next->value && first->value > sec->value)
-		rota_a(tower);
+	fst = *a;
+	sec = fst->next;
+	if (fst->nbr > sec->nbr && fst->nbr < sec->next->nbr)
+		swap_pile(a);
+	else if (sec->nbr < fst->nbr)
+		rota_pile(a);
+	else if (sec->nbr > fst->nbr && sec->nbr > sec->next->nbr)
+		rev_rota_pile(a);
+	if (!trie_ok(a))
+		sort_three(a);
 	else
-		rev_rota_a(tower);
+		return ;
 }
 
-void	sort_tower(t_stack **tower_a, t_stack **tower_b)
+void	mk_tab(t_stack **a, t_stack **b)
 {
-	int	len_a;
+	int	rota;
 
-	len_a = tower_len(tower_a);
-	if (len_a-- > 3 && !value_checkeur(*tower_a))
-		push_to_b(tower_a, tower_b);
-	if (len_a-- > 3 && !value_checkeur(*tower_a))
-		push_to_b(tower_a, tower_b);
-	while (len_a-- > 3 && !value_checkeur(*tower_a))
+	rota = 0;
+	while ((*b))
 	{
-		init_room_a(*tower_a, *tower_b);
-		move_a_to_b(tower_a, tower_b);
+		while ((*a)->nbr < (*b)->nbr)
+		{
+			rota_pile(a);
+			rota++;
+		}
+		push_to(b, a);
+		while (rota > 0)
+		{
+			rev_rota_pile(a);
+			rota--;
+		}
 	}
-	three_room(tower_a);
-	while (*tower_b)
+}// A garde
+
+//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+
+void	dissection(t_stack **a, t_stack **b, t_ref ref, t_data data)
+{
+	int	rev = 0;
+	ref = first_half(ref);
+	data.inception++;
+	while (min_half(a, ref.tab[ref.end_taff]) && nbr_box(a) > 3)
 	{
-		init_room_b(*tower_a, *tower_b);
-		move_b_to_a(tower_a, tower_b);
+		if ((*a)->nbr < ref.tab[ref.end_taff])
+			rev = chunk_diss(a, b, ref, rev);
+		else
+			rota_pile(a);
 	}
-	curr_index(*tower_a);
-	min_on_top(tower_a);
+	while (rev-- > 0)
+		rev_rota_pile(b);
+	if (nbr_box(a) > 3)
+		dissection(a, b, ref, data);
+	if (nbr_box(a) == 3)
+	{
+		sort_three(a);
+		reintegration(b, a, ref);
+		printf("---- %d ----\n", data.inception);
+		printf("| %d | end tab\n",ref.tab[ref.end_taff]);
+		printf("| %d | mid tab\n",ref.tab[ref.ind_mid]);
+		printf("| %d | start tab\n", ref.tab[ref.start_taff]);
+		printf("| %d | size tab\n", ref.non_taff);
+		printf("---- %d ----\n", data.inception);
+	}
+	else if (ref.non_taff == ref.size / 2)
+	{
+		// reintegration(b, a, ref);
+		printf("---- %d ----\n", data.inception);
+		printf("| %d | end tab\n",ref.tab[ref.end_taff]);
+		printf("| %d | mid tab\n",ref.tab[ref.ind_mid]);
+		printf("| %d | start tab\n", ref.tab[ref.start_taff]);
+		printf("| %d | size tab\n", ref.non_taff);
+		printf("---- %d ----\n", data.inception);
+		printf("ok\n");
+	}
+	else
+	{
+		reintegration(b, a, ref);
+		printf("---- %d ----\n", data.inception);
+		printf("| %d | end tab\n",ref.tab[ref.end_taff]);
+		printf("| %d | mid tab\n",ref.tab[ref.ind_mid]);
+		printf("| %d | start tab\n", ref.tab[ref.start_taff]);
+		printf("| %d | size tab\n", ref.non_taff);
+		printf("---- %d ----\n", data.inception);
+	}
+}
+
+void	reintegration(t_stack **from, t_stack **to, t_ref ref)
+{
+	int	i;
+
+	i = 0;
+	while (i++ < ref.non_taf)
+	{
+		if ((*from)->nbr >= ref.tab[ref.ind_mid])
+			push_to(from, to);
+		else
+			rota_pile(from);
+	}
+	while ()
+		rev_rota(from);
+	if (ref.non_taff == 1)
+		only_a(from, to);
+}
+
+void	only_a(t_stack **from, t_stack **to)
+{
+	if ((*from)->pile == 'b')
+	{
+		push_to(from, to);
+		if ((*to)->nbr > (*to)->next->nbr)
+			swap_pile(to);
+	}
+}
+
+void	chunk_split(t_stack **from, t_stack **to, t_ref ref)
+{
+	if ((*from)->nbr >= ref.tab[ref.ind_mid])
+	{
+		push_to(from, to);
+		if ((*from)->nbr < ref.tab[ref.ind_mid + (ref.non_taff / 2)])
+			rota_pile(to);
+	}
+	else
+		rota_pile(from);
 }

@@ -3,92 +3,91 @@
 /*                                                        :::      ::::::::   */
 /*   stack.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rihoy <rihoy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/09 15:15:58 by marvin            #+#    #+#             */
-/*   Updated: 2023/12/09 15:15:58 by marvin           ###   ########.fr       */
+/*   Created: 2023/12/13 10:34:41 by rihoy             #+#    #+#             */
+/*   Updated: 2023/12/29 19:03:42 by rihoy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_V3.h"
+#include "swaplib.h"
 
-t_stack	*room(int content) // on cree la room pour stocker les informations
+t_stack	*box(int value)
 {
-	t_stack	*in;
+	t_stack	*box;
 
-	in = malloc(sizeof(t_stack));
-	if (!in)
+	box = malloc(sizeof(t_stack));
+	if (!box)
 		return (NULL);
-	in->value = content;
-	in->next = NULL;
+	box->nbr = value;
+	box->pile = 'a';
+	box->next = NULL;
+	return (box);
 }
 
-void	add_room(t_stack **tower, t_stack *last_room) // on ajoute une room a la derniere room de la tour
+void	add_box(t_stack	**a, t_stack *box)
 {
-	t_stack	*room;
+	t_stack	*curr;
 
-	if (!tower)
+	curr = *a;
+	if (!(*a))
+		*a = box;
+	else
 	{
-		*tower = last_room;
-		return ;
+		while (curr->next != NULL)
+			curr = curr->next;
+		curr->next = box;
 	}
-	room = *tower;
-	while (room->next != NULL) // on parcours jusqu'a la derniere room
-		room = room->next;
-	room->next = last_room;
-	last_room->prev = room;
 }
 
-void	clear_tower(t_stack **tower) // on nettoie ou detruit la tour
+void	build_in(t_stack **a, const char **argv)
 {
-	t_stack	*room_clear;
+	t_data	in;
 
-	room_clear = *tower;
-	while (room_clear->next != NULL)
+	in.i = 0;
+	while (argv[++in.i])
 	{
-		if (room_clear->prev != NULL)
-			free(room_clear->prev); // librer chaque room
-		room_clear = room_clear->next;
-	}
-	*tower = room_clear->next;
-	free(room_clear); // librer la derniere chambre
-}
-
-void	build_in(const char **argv, t_stack **a, t_stack **b) // construire la tour
-{
-	int	i;
-	int	j;
-	char	*sent;
-
-	i = 0;
-	while (argv[++i] != NULL)
-	{
-		sent = ft_split(argv[i]); // si on nous donne une chaine de caractere on extrait tout de la chaine
-		j = -1;
-		while (sent[++j] != NULL)
+		in.sent = ft_split(argv[in.i]);
+		in.j = -1;
+		while (in.sent[++in.j])
 		{
-			if (onlynum(sent[j])) // regarde si elle est constitue que de nombre
-				add_room(a, room(ft_atoi(sent[j], a, b))); // ajoute a la suite de la tour
+			if (onlydigit(in.sent[in.j]))
+			{
+				in.box = box(ft_atoi(in.sent[in.j], a, in.sent));
+				if (!in.box)
+					error_exit(a);
+				add_box(a, in.box);
+			}
 			else
-				exit_error(a, b); // si il n'y as pas que des chiffre alors on proc la sortie error
+			{
+				freesplit(in.sent);
+				error_exit(a);
+			}
 		}
-		freesplit(sent); // on n'oublie pas de librer la memoire pour valgrind
+		freesplit(in.sent);
 	}
-	if (!same_value(a)) // si il y a des nombres/chiffre similaire alors on proc la sortie error
-		exit_error(a, b); 
 }
 
-int	tower_len(t_stack **tower) // combien de room fait la tour
+void	free_stack(t_stack **a)
 {
-	t_stack	*room;
-	int	i;
+	t_stack	*curr;
 
-	i = 0;
-	room = *tower;
-	while (room != NULL)
+	while (*a)
 	{
-		room = room->next;
-		i++;
+		curr = (*a)->next;
+		free(*a);
+		(*a) = curr;
 	}
-	return (i);
+}
+
+void	print_stack(t_stack **a)
+{
+	t_stack	*curr;
+
+	curr = *a;
+	while (curr)
+	{
+		printf("%d \n", curr->nbr);
+		curr = curr->next;
+	}
 }
