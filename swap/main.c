@@ -6,7 +6,7 @@
 /*   By: rihoy <rihoy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 10:28:22 by rihoy             #+#    #+#             */
-/*   Updated: 2023/12/26 17:36:43 by rihoy            ###   ########.fr       */
+/*   Updated: 2023/12/30 15:33:30 by rihoy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,22 +30,36 @@ int	main(int argc, const char *argv[])
 		error_exit(&a);
 	data.i = 0;
 	data.inception = 0;
-	ref = sort_ref(tab_reference(&a));
+	ref = order_tab(&a);
+	ref.end_taff = 0;
 	if (!trie_ok(&a))
 	{
 		if (nbr_box(&a) == 2)
-			swap_a(&a);
+			swap_pile(&a);
 		else if (nbr_box(&a) == 3)
 			sort_three(&a);
 		else if (nbr_box(&a) > 3)
-		{
-			// half_part(&a, &b, data);
-			// sission(&a, &b, ref, data.inception, data.i);
 			dissection(&a, &b, ref, data);
-		}
 	}
-	free_stack(&b);
-	free(ref.tab);
-	free_stack(&a);
+	free_all(&a, &b, ref);
 	return (0);
+}
+
+// void	printab(t_ref ref)
+// {
+// 	int	i;
+
+// 	i = 0;
+// 	while (i < ref.size)
+// 	{
+// 		printf("%d \n", ref.tab[i]);
+// 		i++;
+// 	}
+// }
+
+void	free_all(t_stack **a, t_stack **b, t_ref ref)
+{
+	free_stack(a);
+	free_stack(b);
+	free(ref.tab);
 }

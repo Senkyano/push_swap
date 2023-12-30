@@ -6,22 +6,34 @@
 /*   By: rihoy <rihoy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 17:35:15 by rihoy             #+#    #+#             */
-/*   Updated: 2023/12/20 19:44:32 by rihoy            ###   ########.fr       */
+/*   Updated: 2023/12/29 18:42:22 by rihoy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "swaplib.h"
 
-int	front_back(int back, int here, int front)
+int	min_half(t_stack **a, int half)
 {
-	if (!(back < here && front > here))
-		return (1);
+	t_stack	*curr;
+
+	curr = *a;
+	while (curr)
+	{
+		if (curr->nbr < half)
+			return (1);
+		curr = curr->next;
+	}
 	return (0);
 }
 
-int	back_front(int back, int here, int front)
+int	chunk_diss(t_stack **a, t_stack **b, t_ref ref, int rev)
 {
-	if (!(back > here && front < here))
-		return (1);
-	return (0);
+	push_to(a, b);
+	if ((*b)->nbr > ref.tab[ref.ind_mid])
+	{
+		if ((*b)->next)
+			rota_pile(b);
+		rev++;
+	}
+	return (rev);
 }

@@ -6,7 +6,7 @@
 /*   By: rihoy <rihoy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 11:01:40 by rihoy             #+#    #+#             */
-/*   Updated: 2023/12/20 08:47:50 by rihoy            ###   ########.fr       */
+/*   Updated: 2023/12/29 19:06:40 by rihoy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ bool	trie_ok(t_stack **a)
 	t_stack	*cmp;
 
 	curr = *a;
-	while (curr->next)
+	while (curr->next != NULL)
 	{
 		cmp = curr->next;
 		if (curr->nbr > cmp->nbr)

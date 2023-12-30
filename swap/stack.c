@@ -6,7 +6,7 @@
 /*   By: rihoy <rihoy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 10:34:41 by rihoy             #+#    #+#             */
-/*   Updated: 2023/12/20 13:15:37 by rihoy            ###   ########.fr       */
+/*   Updated: 2023/12/29 19:03:42 by rihoy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ t_stack	*box(int value)
 	if (!box)
 		return (NULL);
 	box->nbr = value;
+	box->pile = 'a';
 	box->next = NULL;
-	box->prev = NULL;
 	return (box);
 }
 
@@ -31,14 +31,13 @@ void	add_box(t_stack	**a, t_stack *box)
 
 	curr = *a;
 	if (!(*a))
-	{
 		*a = box;
-		return ;
+	else
+	{
+		while (curr->next != NULL)
+			curr = curr->next;
+		curr->next = box;
 	}
-	while (curr->next != NULL)
-		curr = curr->next;
-	curr->next = box;
-	box->prev = curr;
 }
 
 void	build_in(t_stack **a, const char **argv)
