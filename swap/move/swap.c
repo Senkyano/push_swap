@@ -23,30 +23,32 @@ void	swap(t_stack **box)
 	first = *box;
 	sec = first->next;
 	third = sec->next;
-	if (third != NULL)
-		third->prev = first;
 	first->next = third;
-	first->prev = sec;
 	sec->next = first;
-	sec->prev = NULL;
 	(*box) = sec;
 }
 
-void	swap_a(t_stack **box)
+void	swap_pile(t_stack **box)
 {
-	swap(box);
-	write(1, "sa\n", 3);
+	if ((*box)->next && (*box))
+	{
+		swap(box);
+		action("s", (*box)->pile);
+	}
 }
 
-void	swap_b(t_stack **box)
-{
-	swap(box);
-	write(1, "sb\n", 3);
-}
+// void	swap_b(t_stack **box)
+// {
+// 	swap(box);
+// 	write(1, "sb\n", 3);
+// }
 
 void	swap_all(t_stack **a, t_stack **b)
 {
-	swap(a);
-	swap(b);
-	write(1, "sb\n", 3);
+	if (((*a)->next || (*a)) && ((*b)->next || (*b)))
+	{
+		swap(a);
+		swap(b);
+		write(1, "ss\n", 3);
+	}
 }
