@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../swaplib.h"
+#include "swaplib.h"
 
 void	push_to(t_stack **from, t_stack **to)
 {

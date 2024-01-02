@@ -6,7 +6,7 @@
 /*   By: rihoy <rihoy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 11:26:05 by rihoy             #+#    #+#             */
-/*   Updated: 2024/01/01 19:12:45 by rihoy            ###   ########.fr       */
+/*   Updated: 2024/01/02 19:02:03 by rihoy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,30 +87,18 @@ void	dissection(t_stack **a, t_stack **b, t_ref ref, t_data data)
 	}
 	else if (ref.non_taff == ref.size / 2 - 1 || ref.non_taff == ref.size / 2)
 	{
-		// mid = ref.non_taff;
-		// ref.start_taff = ref.ind_mid;
-		// ref.non_taff = ref.non_taff / 2;
-		// ref.ind_mid = ref.start_taff + ref.non_taff / 2;
-		// // reintegration(b, a, ref);
+		// mk_tab(a, b);
+		// reintegration(b, a, ref);
 		printf("---- %d ----\n", data.inception);
 		printf("| %d | end tab\n",ref.tab[ref.end_taff - 1]);
 		printf("| %d | mid tab\n",ref.tab[ref.ind_mid]);
 		printf("| %d | start tab\n", ref.tab[ref.start_taff]);
 		printf("| %d | size tab\n", ref.non_taff);
 		printf("---- %d ----\n", data.inception);
-		// ref.non_taff = mid - ref.non_taff;
-		// ref.ind_mid = ref.non_taff / 2;
-		// ref.start_taff = 0;
-		// // reintegration(b, a, ref);
-		// printf("---- %d ----\n", data.inception);
-		// printf("| %d | end tab\n",ref.tab[ref.end_taff - 1]);
-		// printf("| %d | mid tab\n",ref.tab[ref.ind_mid]);
-		// printf("| %d | start tab\n", ref.tab[ref.start_taff]);
-		// printf("| %d | size tab\n", ref.non_taff);
-		// printf("---- %d ----\n", data.inception);
 	}
 	else
 	{
+		// mk_tab(a, b);
 		// reintegration(b, a, ref);
 		printf("---- %d ----\n", data.inception);
 		printf("| %d | end tab\n",ref.tab[ref.end_taff - 1]);
@@ -126,6 +114,8 @@ void	reintegration(t_stack **from, t_stack **to, t_ref ref)
 	int	i;
 	
 	i = 0;
+	// if (chekeur(from, to))
+	// 	return ;
 	if (ref.non_taff <= 2 && ref.non_taff > 0)
 	{
 		while (i++ < ref.non_taff)
@@ -133,56 +123,8 @@ void	reintegration(t_stack **from, t_stack **to, t_ref ref)
 	}
 	else if (ref.non_taff == 3 && ref.non_taff > 0)
 		reinsert_3(from, to, ref);
-	// else if (ref.non_taff != 0)
-	// 	reinsert_all(from, to, ref);
-}
-
-void	reinsert_all(t_stack **from, t_stack **to, t_ref ref)
-{
-	t_data	dat;
-
-	dat = trieur(from, to, ref);
-	ref.non_taff = dat.push - dat.rota_to;
-	ref.ind_mid = ref.ind_mid + 1;
-	// reintegration(to, from, ref);
-}
-
-t_data	trieur(t_stack **from, t_stack **to, t_ref ref)
-{
-	t_data	data;
-
-	data.i = 0;
-	data.push = 0;
-	data.rota_from = 0;
-	data.rota_to = 0;
-	while (data.i++ < ref.non_taff)
-	{
-		if ((*from)->nbr >= ref.tab[ref.ind_mid])
-		{
-			push_to(from, to);
-			if ((*to)->nbr < ref.tab[ref.ind_mid + (ref.non_taff / 2) / 2])
-			{
-				if ((*from)->nbr < ref.tab[ref.ind_mid])
-				{
-					rota_all(from, to);
-					data.rota_to++;
-					data.rota_from++;
-				}
-				else
-				{
-					rota_pile(to);
-					data.rota_to++;
-				}
-			}
-			data.push++;
-		}
-		else
-		{
-			rota_pile(from);
-			data.rota_from++;
-		}
-	}
-	return (data);
+	else
+		reinsert_all(from, to, ref);
 }
 
 void	reinsert_3(t_stack **from, t_stack **to, t_ref ref)
@@ -197,7 +139,7 @@ void	reinsert_3(t_stack **from, t_stack **to, t_ref ref)
 		push_to(from, to);
 		if ((*to)->nbr > (*to)->next->nbr && (*to)->pile == 'a')
 			swap_pile(to);
-		if ((*to)->nbr < ref.tab[ref.ind_mid])
+		if ((*to)->nbr < ref.tab[ref.ind_mid] && i < ref.non_taff - 1)
 		{
 			rota_pile(to);
 			rot = 1;
@@ -216,14 +158,14 @@ void	only_a(t_stack **from, t_stack **to)
 	if ((*from)->pile == 'b')
 	{
 		push_to(from, to);
-		if ((*to)->nbr > (*to)->next->nbr
-			&& (*from)->nbr < (*from)->next->nbr)
-			swap_all(from, to);
 		if ((*to)->nbr > (*to)->next->nbr)
 			swap_pile(to);
 	}
-	if ((*from)->nbr > (*from)->next->nbr && (*from)->pile == 'a')
-		swap_pile(from);
+	else if ((*from)->pile == 'a')
+	{
+		if ((*from)->nbr > (*from)->next->nbr)
+			swap_pile(from);
+	}
 }
 
 bool	checkeur(t_stack **a, t_ref ref)
