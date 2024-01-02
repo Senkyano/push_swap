@@ -6,7 +6,7 @@
 /*   By: rihoy <rihoy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 11:26:05 by rihoy             #+#    #+#             */
-/*   Updated: 2023/12/30 17:55:51 by rihoy            ###   ########.fr       */
+/*   Updated: 2024/01/01 19:12:45 by rihoy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ void	mk_tab(t_stack **a, t_stack **b)
 void	dissection(t_stack **a, t_stack **b, t_ref ref, t_data data)
 {
 	int	rev = 0;
+	// int	mid;
+
 	ref = first_half(ref);
 	data.inception++;
 	while (min_half(a, ref.tab[ref.end_taff]) && nbr_box(a) > 3)
@@ -77,28 +79,41 @@ void	dissection(t_stack **a, t_stack **b, t_ref ref, t_data data)
 		sort_three(a);
 		reintegration(b, a, ref);
 		printf("---- %d ----\n", data.inception);
-		printf("| %d | end tab\n",ref.tab[ref.end_taff]);
+		printf("| %d | end tab\n",ref.tab[ref.end_taff - 1]);
 		printf("| %d | mid tab\n",ref.tab[ref.ind_mid]);
 		printf("| %d | start tab\n", ref.tab[ref.start_taff]);
 		printf("| %d | size tab\n", ref.non_taff);
 		printf("---- %d ----\n", data.inception);
 	}
-	else if (ref.non_taff == ref.size / 2)
+	else if (ref.non_taff == ref.size / 2 - 1 || ref.non_taff == ref.size / 2)
 	{
-		// reintegration(b, a, ref);
+		// mid = ref.non_taff;
+		// ref.start_taff = ref.ind_mid;
+		// ref.non_taff = ref.non_taff / 2;
+		// ref.ind_mid = ref.start_taff + ref.non_taff / 2;
+		// // reintegration(b, a, ref);
 		printf("---- %d ----\n", data.inception);
-		printf("| %d | end tab\n",ref.tab[ref.end_taff]);
+		printf("| %d | end tab\n",ref.tab[ref.end_taff - 1]);
 		printf("| %d | mid tab\n",ref.tab[ref.ind_mid]);
 		printf("| %d | start tab\n", ref.tab[ref.start_taff]);
 		printf("| %d | size tab\n", ref.non_taff);
 		printf("---- %d ----\n", data.inception);
-		printf("ok\n");
+		// ref.non_taff = mid - ref.non_taff;
+		// ref.ind_mid = ref.non_taff / 2;
+		// ref.start_taff = 0;
+		// // reintegration(b, a, ref);
+		// printf("---- %d ----\n", data.inception);
+		// printf("| %d | end tab\n",ref.tab[ref.end_taff - 1]);
+		// printf("| %d | mid tab\n",ref.tab[ref.ind_mid]);
+		// printf("| %d | start tab\n", ref.tab[ref.start_taff]);
+		// printf("| %d | size tab\n", ref.non_taff);
+		// printf("---- %d ----\n", data.inception);
 	}
 	else
 	{
-		reintegration(b, a, ref);
+		// reintegration(b, a, ref);
 		printf("---- %d ----\n", data.inception);
-		printf("| %d | end tab\n",ref.tab[ref.end_taff]);
+		printf("| %d | end tab\n",ref.tab[ref.end_taff - 1]);
 		printf("| %d | mid tab\n",ref.tab[ref.ind_mid]);
 		printf("| %d | start tab\n", ref.tab[ref.start_taff]);
 		printf("| %d | size tab\n", ref.non_taff);
@@ -109,19 +124,91 @@ void	dissection(t_stack **a, t_stack **b, t_ref ref, t_data data)
 void	reintegration(t_stack **from, t_stack **to, t_ref ref)
 {
 	int	i;
-
+	
 	i = 0;
-	while (i++ < ref.non_taf)
+	if (ref.non_taff <= 2 && ref.non_taff > 0)
+	{
+		while (i++ < ref.non_taff)
+			only_a(from, to);
+	}
+	else if (ref.non_taff == 3 && ref.non_taff > 0)
+		reinsert_3(from, to, ref);
+	// else if (ref.non_taff != 0)
+	// 	reinsert_all(from, to, ref);
+}
+
+void	reinsert_all(t_stack **from, t_stack **to, t_ref ref)
+{
+	t_data	dat;
+
+	dat = trieur(from, to, ref);
+	ref.non_taff = dat.push - dat.rota_to;
+	ref.ind_mid = ref.ind_mid + 1;
+	// reintegration(to, from, ref);
+}
+
+t_data	trieur(t_stack **from, t_stack **to, t_ref ref)
+{
+	t_data	data;
+
+	data.i = 0;
+	data.push = 0;
+	data.rota_from = 0;
+	data.rota_to = 0;
+	while (data.i++ < ref.non_taff)
 	{
 		if ((*from)->nbr >= ref.tab[ref.ind_mid])
+		{
 			push_to(from, to);
+			if ((*to)->nbr < ref.tab[ref.ind_mid + (ref.non_taff / 2) / 2])
+			{
+				if ((*from)->nbr < ref.tab[ref.ind_mid])
+				{
+					rota_all(from, to);
+					data.rota_to++;
+					data.rota_from++;
+				}
+				else
+				{
+					rota_pile(to);
+					data.rota_to++;
+				}
+			}
+			data.push++;
+		}
 		else
+		{
 			rota_pile(from);
+			data.rota_from++;
+		}
 	}
-	while ()
-		rev_rota(from);
-	if (ref.non_taff == 1)
-		only_a(from, to);
+	return (data);
+}
+
+void	reinsert_3(t_stack **from, t_stack **to, t_ref ref)
+{
+	int	i;
+	int	rot;
+
+	i = 0;
+	rot = 0;
+	while (i++ < ref.non_taff)
+	{
+		push_to(from, to);
+		if ((*to)->nbr > (*to)->next->nbr && (*to)->pile == 'a')
+			swap_pile(to);
+		if ((*to)->nbr < ref.tab[ref.ind_mid])
+		{
+			rota_pile(to);
+			rot = 1;
+		}
+	}
+	ref.non_taff = 2;
+	reintegration(to, from, ref);
+	if (rot == 1)
+		rev_rota_pile(to);
+	ref.non_taff = 1;
+	reintegration(to, from, ref);
 }
 
 void	only_a(t_stack **from, t_stack **to)
@@ -129,19 +216,31 @@ void	only_a(t_stack **from, t_stack **to)
 	if ((*from)->pile == 'b')
 	{
 		push_to(from, to);
+		if ((*to)->nbr > (*to)->next->nbr
+			&& (*from)->nbr < (*from)->next->nbr)
+			swap_all(from, to);
 		if ((*to)->nbr > (*to)->next->nbr)
 			swap_pile(to);
 	}
+	if ((*from)->nbr > (*from)->next->nbr && (*from)->pile == 'a')
+		swap_pile(from);
 }
 
-void	chunk_split(t_stack **from, t_stack **to, t_ref ref)
+bool	checkeur(t_stack **a, t_ref ref)
 {
-	if ((*from)->nbr >= ref.tab[ref.ind_mid])
+	t_stack	*curr;
+
+	curr = *a;
+	while (curr && curr->next)
 	{
-		push_to(from, to);
-		if ((*from)->nbr < ref.tab[ref.ind_mid + (ref.non_taff / 2)])
-			rota_pile(to);
+		if (curr->nbr < curr->next->nbr)
+		{
+			if (curr->next->nbr == ref.tab[ref.size - 1])
+				return (1);
+			curr = curr->next;
+		}
+		else
+			return (0);
 	}
-	else
-		rota_pile(from);
+	return (0);
 }

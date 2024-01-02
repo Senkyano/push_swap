@@ -6,7 +6,7 @@
 /*   By: rihoy <rihoy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 14:46:30 by rihoy             #+#    #+#             */
-/*   Updated: 2023/12/30 15:25:55 by rihoy            ###   ########.fr       */
+/*   Updated: 2024/01/01 12:39:55 by rihoy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,10 @@ t_ref	order_tab(t_stack **a)
 {
 	t_stack	*src;
 	t_ref	ref;
-	int 	i = 0;
+	int		i;
 	int		tmp;
 
+	i = 0;
 	ref.size = nbr_box(a);
 	ref.tab = malloc(sizeof(int) * ref.size);
 	if (!ref.tab)
@@ -104,7 +105,7 @@ t_ref	order_tab(t_stack **a)
 // 	return (ref);
 // }
 
-t_ref first_half(t_ref ref)
+t_ref	first_half(t_ref ref)
 {
 	ref.non_taff = rest_taff(ref, ref.end_taff) / 2;
 	ref.half_taff = ref.non_taff / 2;
@@ -126,7 +127,7 @@ t_ref first_half(t_ref ref)
 int	rest_taff(t_ref ref, int ind)
 {
 	int	i;
-	
+
 	i = 0;
 	while (ind++ < ref.size - 1)
 		i++;

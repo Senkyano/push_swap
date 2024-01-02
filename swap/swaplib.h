@@ -6,7 +6,7 @@
 /*   By: rihoy <rihoy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 10:28:34 by rihoy             #+#    #+#             */
-/*   Updated: 2023/12/30 15:52:05 by rihoy            ###   ########.fr       */
+/*   Updated: 2024/01/01 18:55:56 by rihoy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,10 @@ typedef	struct s_data
 	int		j;
 	int		size;
 	int		inception;
+
+	int		push;
+	int		rota_from;
+	int		rota_to;
 	t_stack	*box;
 	char	**sent;
 }	t_data;
@@ -75,10 +79,6 @@ typedef	struct	s_ref
 	int	ind_mid;
 	int	start_taff;
 	int	end_taff;
-	
-	int	non_taff_r;
-	int	non_taff_p;
-	int	mid_tmp;
 }	t_ref;
 // REFERENCE
 t_ref		sort_ref(t_ref ref);
@@ -124,7 +124,14 @@ int	rest_taff(t_ref ref, int ind);// utils
 
 void	dissection(t_stack **a, t_stack **b, t_ref ref, t_data data);//algo
 void	reintegration(t_stack **from, t_stack **to, t_ref ref);
-
+void	chunk_split(t_stack **from, t_stack **to, t_ref ref);
+t_ref	new_ref_from(t_ref ref);
+t_ref	new_ref_to(t_ref ref);
+void	only_a(t_stack **from, t_stack **to);
+bool	checkeur(t_stack **a, t_ref ref);
+void	reinsert_3(t_stack **from, t_stack **to, t_ref ref);
+void	reinsert_all(t_stack **from, t_stack **to, t_ref ref);
+t_data	trieur(t_stack **from, t_stack **to, t_ref ref);
 
 // UTILS ALGO
 void	print_tab(t_ref ref);
