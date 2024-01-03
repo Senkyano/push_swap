@@ -6,7 +6,7 @@
 /*   By: rihoy <rihoy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 10:28:34 by rihoy             #+#    #+#             */
-/*   Updated: 2024/01/02 16:37:07 by rihoy            ###   ########.fr       */
+/*   Updated: 2024/01/03 14:37:09 by rihoy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,9 @@ bool	checkeur(t_stack **a, t_ref ref);
 void	reinsert_3(t_stack **from, t_stack **to, t_ref ref);
 void	reinsert_all(t_stack **from, t_stack **to, t_ref ref);
 t_data	trieur(t_stack **from, t_stack **to, t_ref ref);
-void	ecomove(t_stack **from, t_stack **to, t_data data);
+void	ecomove(t_stack **from, t_stack **to, int r_to, int r_from);
+int	check_three(t_stack **pile);
+void	reinsert_3_b(t_stack **from, t_stack **to, t_ref ref);
 
 // UTILS ALGO
 void	print_tab(t_ref ref);
