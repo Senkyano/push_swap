@@ -6,7 +6,7 @@
 /*   By: rihoy <rihoy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 11:26:05 by rihoy             #+#    #+#             */
-/*   Updated: 2024/01/03 17:44:48 by rihoy            ###   ########.fr       */
+/*   Updated: 2024/01/04 14:27:42 by rihoy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,9 @@ void	dissection(t_stack **a, t_stack **b, t_ref ref, t_data data)
 	{
 		sort_three(a);
 		reintegration(b, a, ref);
+		printf("---- other ----\n");
+		printf("| %d | mid sup\n",ref.tab[ref.ind_mid + ((ref.end_taff + 1) - ref.ind_mid) / 2]);
+		printf("---------------\n");
 		printf("---- %d ----\n", data.inception);
 		printf("| %d | end tab\n",ref.tab[ref.end_taff - 1]);
 		printf("| %d | mid tab\n",ref.tab[ref.ind_mid]);
@@ -88,7 +91,10 @@ void	dissection(t_stack **a, t_stack **b, t_ref ref, t_data data)
 	else if (ref.non_taff == ref.size / 2 - 1 || ref.non_taff == ref.size / 2)
 	{
 		// mk_tab(a, b);
-		reintegration(b, a, ref);
+		// reintegration(b, a, ref);
+		printf("---- other ----\n");
+		printf("| %d | mid sup\n",ref.tab[ref.ind_mid + ((ref.end_taff + 1) - ref.ind_mid) / 2]);
+		printf("---------------\n");
 		printf("---- %d ----\n", data.inception);
 		printf("| %d | end tab\n",ref.tab[ref.end_taff - 1]);
 		printf("| %d | mid tab\n",ref.tab[ref.ind_mid]);
@@ -99,7 +105,10 @@ void	dissection(t_stack **a, t_stack **b, t_ref ref, t_data data)
 	else
 	{
 		// mk_tab(a, b);
-		reintegration(b, a, ref);
+		printf("---- other ----\n");
+		printf("| %d | mid sup\n",ref.tab[ref.ind_mid + ((ref.end_taff + 1) - ref.ind_mid) / 2]);
+		printf("---------------\n");
+		// reintegration(b, a, ref);
 		printf("---- %d ----\n", data.inception);
 		printf("| %d | end tab\n",ref.tab[ref.end_taff - 1]);
 		printf("| %d | mid tab\n",ref.tab[ref.ind_mid]);
@@ -117,8 +126,67 @@ void	reintegration(t_stack **from, t_stack **to, t_ref ref)
 	if (ref.non_taff <= 2)
 		while (i++ < ref.non_taff)
 			only_a(from, to);
-	// else
-		
+	else if (ref.non_taff <= 4)
+	else
+}
+
+void	jhin(t_stack **from, t_stack **to, t_ref ref)
+{
+	int	i;
+
+	i = 0;
+	if ((*from)->pile == 'a')
+	{
+		while 
+	}
+}
+
+// t_ref	mid_supsup(t_ref ref)
+// {
+// 	t_ref	refsup;
+	
+// }
+
+// t_ref	mid_suplow(t_ref ref)
+// {
+// 	t_ref	refsl;
+	
+// }
+
+// t_ref	mid_lower(t_ref ref)
+// {
+// 	t_ref	reflow;
+	
+// }
+
+// void	all_for(t_stack **from, t_stack **to, t_ref ref)
+// {
+	
+// }
+
+void	cuting_part(t_stack **from, t_stack **to, t_ref ref)
+{
+	int	i;
+	int	mid_sup;
+
+	i = 0;
+	mid_sup = ref.ind_mid + ((ref.end_taff + 1) - ref.ind_mid) / 2;
+	while (i++ < ref.non_taff)
+	{
+		if ((*from)->nbr >= ref.tab[ref.ind_mid])
+		{
+			push_to(from, to);
+			if ((*to)->nbr < ref.tab[mid_sup])
+			{
+				if ((*from)->nbr < ref.tab[ref.ind_mid])
+					rota_all(from, to);
+				else
+					rota_pile(to);
+			}
+		}
+		else
+			rota_pile(from);
+	}
 }
 
 void	only_a(t_stack **from, t_stack **to)
