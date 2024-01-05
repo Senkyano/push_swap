@@ -6,7 +6,7 @@
 /*   By: rihoy <rihoy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 10:28:34 by rihoy             #+#    #+#             */
-/*   Updated: 2024/01/04 17:06:14 by rihoy            ###   ########.fr       */
+/*   Updated: 2024/01/05 15:22:03 by rihoy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,13 @@ t_ref	new_ref_to(t_ref ref);
 void	only_a(t_stack **from, t_stack **to);
 bool	checkeur(t_stack **a, t_ref ref);
 void	trie_b(t_stack **from, t_stack **to, t_ref ref);
+void	trie_a(t_stack **from, t_stack **a, t_ref ref);
+t_ref	mid_lower(t_ref ref);
+t_ref	mid_supsup(t_ref ref);
+t_ref	mid_suplow(t_ref ref);
+
+
+
 
 // UTILS ALGO
 void	print_tab(t_ref ref);
