@@ -6,7 +6,7 @@
 /*   By: rihoy <rihoy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 11:26:05 by rihoy             #+#    #+#             */
-/*   Updated: 2024/01/05 15:55:45 by rihoy            ###   ########.fr       */
+/*   Updated: 2024/01/05 18:34:50 by rihoy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,7 @@ void	dissection(t_stack **a, t_stack **b, t_ref ref, t_data data)
 		reintegration(b, a, ref);
 		printf("\n");
 		printf("---- other ----\n");
-		printf("| %d | mid sup\n",ref.tab[ref.ind_mid + ((ref.end_taff + 1) - ref.ind_mid) / 2]);
-		printf("| %d | non_taff mid\n", ref.end_taff - ref.ind_mid);
+		mid_supsup(ref);
 		mid_suplow(ref);
 		mid_lower(ref);
 		printf("---- other ----\n");
@@ -99,8 +98,7 @@ void	dissection(t_stack **a, t_stack **b, t_ref ref, t_data data)
 		// reintegration(b, a, ref);
 		printf("\n");
 		printf("---- other ----\n");
-		printf("| %d | mid sup\n",ref.tab[ref.ind_mid + ((ref.end_taff + 1) - ref.ind_mid) / 2]);
-		printf("| %d | non_taff mid\n", ref.end_taff - ref.ind_mid);
+		mid_supsup(ref);
 		mid_suplow(ref);
 		mid_lower(ref);
 		printf("---- other ----\n");
@@ -117,8 +115,7 @@ void	dissection(t_stack **a, t_stack **b, t_ref ref, t_data data)
 		// mk_tab(a, b);
 		printf("\n");
 		printf("---- other ----\n");
-		printf("| %d | mid sup\n",ref.tab[ref.ind_mid + ((ref.end_taff + 1) - ref.ind_mid) / 2]);
-		printf("| %d | non_taff mid\n", ref.end_taff - ref.ind_mid);
+		mid_supsup(ref);
 		mid_suplow(ref);
 		mid_lower(ref);
 		printf("---- other ----\n");
@@ -197,23 +194,32 @@ void	trie_b(t_stack **from, t_stack **to, t_ref ref)
 	reintegration(to, from, ref);
 }
 
-// t_ref	mid_supsup(t_ref ref)
-// {
-// 	t_ref	refsupsup;
+t_ref	mid_supsup(t_ref ref)
+{
+	t_ref	refsupsup;
 
-// 	refsupsup.start_taff = ;
-// 	refsupsup.non_taff = ;
-// 	refsupsup.ind_mid = ;
-// }
+	refsupsup.start_taff = ref.ind_mid + ((ref.end_taff - ref.ind_mid) / 2);
+	refsupsup.non_taff = ref.end_taff - refsupsup.start_taff;
+	refsupsup.ind_mid = refsupsup.start_taff + refsupsup.non_taff / 2;
+	printf("| %d | end_taff suplow\n", ref.tab[ref.end_taff]);
+	printf("| %d | mid suplow\n", ref.tab[refsupsup.ind_mid]);
+	printf("| %d | start_taff suplow\n", ref.tab[refsupsup.start_taff]);
+	printf("| %d | non_taff suplow\n", refsupsup.non_taff);
+	return (refsupsup);
+}
 
 t_ref	mid_suplow(t_ref ref)
 {
 	t_ref	refsuplow;
 	
 	refsuplow.start_taff = ref.ind_mid;
-	refsuplow.end_taff = ref.ind_mid + ((ref.end_taff - ref.ind_mid) / 2) / 2;
-	printf("| %d | mid suplow\n", ref.tab[refsuplow.end_taff]);
-	printf("| %d | non_taff suplow\n",);
+	refsuplow.end_taff = ref.ind_mid + ((ref.end_taff - ref.ind_mid) / 2);
+	refsuplow.non_taff = refsuplow.end_taff - refsuplow.start_taff;
+	refsuplow.ind_mid = refsuplow.start_taff + refsuplow.non_taff / 2;
+	printf("| %d | end_taff suplow\n", ref.tab[refsuplow.end_taff]);
+	printf("| %d | mid suplow\n", ref.tab[refsuplow.ind_mid]);
+	printf("| %d | start_taff suplow\n", ref.tab[refsuplow.start_taff]);
+	printf("| %d | non_taff suplow\n", refsuplow.non_taff);
 	return (refsuplow);
 }
 
@@ -224,7 +230,9 @@ t_ref	mid_lower(t_ref ref)
 	reflow.end_taff = ref.ind_mid;
 	reflow.non_taff = ref.ind_mid - ref.start_taff;
 	reflow.ind_mid = ref.start_taff + (ref.ind_mid - ref.start_taff) / 2;
+	printf("| %d | end_taff low\n", ref.tab[reflow.end_taff]);
 	printf("| %d | mid low\n", ref.tab[reflow.ind_mid]);
+	printf("| %d | start_taff low\n", ref.tab[ref.start_taff]);
 	printf("| %d | non_taff low\n", reflow.non_taff);
 	return (reflow);
 }
