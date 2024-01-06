@@ -6,7 +6,7 @@
 /*   By: rihoy <rihoy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 11:26:05 by rihoy             #+#    #+#             */
-/*   Updated: 2024/01/06 18:47:45 by rihoy            ###   ########.fr       */
+/*   Updated: 2024/01/06 19:26:49 by rihoy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,60 +138,33 @@ void	reintegration(t_stack **from, t_stack **to, t_ref ref)
 	if (ref.non_taff <= 2)
 		while (i++ < ref.non_taff)
 			only_a(from, to);
-	else if (ref.non_taff <= 4 && (*from)->pile == 'a')
-		trie_a(from, to, ref);
-	else if (ref.non_taff <= 4 && (*from)->pile == 'b')
-		trie_b(from, to, ref);
-	else
-		all_for(from, to, ref);
+	else if (ref.non_taff <= 4)
+		trie_four(from, to, ref);
+	// else
+	// 	all_for(from, to, ref);
 }
 
-void	trie_a(t_stack **from, t_stack **to, t_ref ref)
+void	trie_four(t_stack **from, t_stack **to, t_ref ref)
 {
 	int	i;
-	int	rot;
+	int	rota;
 
 	i = 0;
+	rota = 0;
 	while (i++ < ref.non_taff)
 	{
-		if ((*from)-> nbr < ref.tab[ref.ind_mid])
-			push_to(from, to);
-		else if (i < ref.non_taff - 1)
-		{
-			rota_pile(from);
-			rot++;
-		}
-	}
-	ref.non_taff = ref.non_taff - rot;
-	while (rot-- > 0)
-		rev_rota_pile(from);
-	if ((*from)->nbr > (*from)->next->nbr)
-		swap_pile(from);
-	reintegration(to, from, ref);
-}
-
-void	trie_b(t_stack **from, t_stack **to, t_ref ref)
-{
-	int	i;
-	int	rot;
-
-	rot = 0;
-	i = 0;
-	while (i++ < ref.non_taff)
-	{
-		push_to(from, to);
+		only_a(from, to);
 		if ((*to)->nbr < ref.tab[ref.ind_mid])
 		{
 			rota_pile(to);
-			rot++;
+			rota++;
 		}
 	}
-	ref.non_taff = ref.non_taff - rot;
-	reintegration(to, from, ref);
-	ref.non_taff = rot;
-	while (rot-- > 0)
+	while (rota-- > 0)
+	{
 		rev_rota_pile(to);
-	reintegration(to, from, ref);
+		only_a(to, from);
+	}
 }
 
 t_ref	mid_supsup(t_ref ref)
@@ -237,23 +210,23 @@ t_ref	mid_lower(t_ref ref)
 	return (reflow);
 }
 
-void	all_for(t_stack **from, t_stack **to, t_ref ref)
-{
-	// t_ref	fst;
-	// t_ref	sec;
-	// t_ref	thr;
-	t_data	dt;
+// void	all_for(t_stack **from, t_stack **to, t_ref ref)
+// {
+// 	// t_ref	fst;
+// 	// t_ref	sec;
+// 	// t_ref	thr;
+// 	// t_data	dt;
 
-	mid_supsup(ref);
-	mid_suplow(ref);
-	mid_lower(ref);
-	// dt = cuting_part(from, to, ref);
-	printf("%d rotafrom, %d rota_to \n", dt.rota_from, dt.rota_to);
-	// reintegration(to, from, fst);
-	// ecomove(from, to, dt);
-// 	reintegration(to, from, sec);
-// 	reintegration(from, to, thr);
-}
+// 	// mid_supsup(ref);
+// 	// mid_suplow(ref);
+// 	// mid_lower(ref);
+// 	// dt = cuting_part(from, to, ref);
+// 	// printf("%d rotafrom, %d rota_to \n", dt.rota_from, dt.rota_to);
+// 	// reintegration(to, from, fst);
+// 	// ecomove(from, to, dt);
+// // 	reintegration(to, from, sec);
+// // 	reintegration(from, to, thr);
+// }
 
 void	ecomove(t_stack **from, t_stack **to, t_data dt)
 {
@@ -265,45 +238,10 @@ void	ecomove(t_stack **from, t_stack **to, t_data dt)
 		rev_rota_pile(from);
 }
 
-t_data	cuting_part(t_stack **from, t_stack **to, t_ref ref)
-{
-	int	i;
-	int	mid_sup;
-	t_data	dt;
+// t_data	cuting_part(t_stack **from, t_stack **to, t_ref ref)
+// {
 
-	dt.rota_from = 0;
-	dt.rota_to = 0;
-	i = 0;
-	mid_sup = ref.ind_mid + ((ref.end_taff + 1) - ref.ind_mid) / 2;
-	while (i++ < ref.non_taff)
-	{
-		if ((*from)->nbr >= ref.tab[ref.ind_mid])
-		{
-			push_to(from, to);
-			if ((*to)->nbr < ref.tab[mid_sup])
-			{
-				if ((*from)->nbr < ref.tab[ref.ind_mid])
-				{
-					rota_all(from, to);
-					dt.rota_from++;
-					dt.rota_to++;
-					i++;
-				}
-				else
-				{
-					rota_pile(to);
-					dt.rota_to++;
-				}
-			}
-		}
-		else
-		{
-			rota_pile(from);
-			dt.rota_from++;
-		}
-	}
-	return (dt);
-}
+// }
 
 void	only_a(t_stack **from, t_stack **to)
 {
