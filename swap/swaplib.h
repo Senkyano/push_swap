@@ -6,7 +6,7 @@
 /*   By: rihoy <rihoy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 10:28:34 by rihoy             #+#    #+#             */
-/*   Updated: 2024/01/02 16:37:07 by rihoy            ###   ########.fr       */
+/*   Updated: 2024/01/06 18:25:12 by rihoy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,10 +129,14 @@ t_ref	new_ref_from(t_ref ref);
 t_ref	new_ref_to(t_ref ref);
 void	only_a(t_stack **from, t_stack **to);
 bool	checkeur(t_stack **a, t_ref ref);
-void	reinsert_3(t_stack **from, t_stack **to, t_ref ref);
-void	reinsert_all(t_stack **from, t_stack **to, t_ref ref);
-t_data	trieur(t_stack **from, t_stack **to, t_ref ref);
-void	ecomove(t_stack **from, t_stack **to, t_data data);
+void	trie_b(t_stack **from, t_stack **to, t_ref ref);
+void	trie_a(t_stack **from, t_stack **a, t_ref ref);
+t_ref	mid_lower(t_ref ref);
+t_ref	mid_supsup(t_ref ref);
+t_ref	mid_suplow(t_ref ref);
+t_data	cuting_part(t_stack **from, t_stack **to, t_ref ref);
+void	ecomove(t_stack **from, t_stack **to, t_data dt);
+void	all_for(t_stack **from, t_stack **to, t_ref ref);
 
 // UTILS ALGO
 void	print_tab(t_ref ref);
