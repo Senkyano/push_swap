@@ -17,7 +17,7 @@ void	rota(t_stack **box)
 	t_stack	*first_box;
 	t_stack	*last_box;
 
-	if ((*box) == NULL || (*box)->next == NULL)
+	if ((*box) == NULL && (*box)->next == NULL)
 		return ;
 	first_box = (*box);
 	last_box = (*box);
@@ -30,7 +30,7 @@ void	rota(t_stack **box)
 
 void	rota_pile(t_stack **box)
 {
-	if ((*box)->next || (*box))
+	if ((*box)->next && (*box))
 	{
 		rota(box);
 		action("r", (*box)->pile);
@@ -45,7 +45,10 @@ void	rota_pile(t_stack **box)
 
 void	rota_all(t_stack **a, t_stack **b)
 {
-	rota(a);
-	rota(b);
-	write(1, "rr\n", 3);
+	if (((*a)->next && (*a)) && ((*b)->next && (*b)))
+	{
+		rota(a);
+		rota(b);
+		write(1, "rr\n", 3);
+	}
 }

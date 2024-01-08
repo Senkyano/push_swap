@@ -17,7 +17,7 @@ void	rev_rota(t_stack **box)
 	t_stack *first_box;
 	t_stack	*last_box;
 
-	if ((*box)->next == NULL || (*box) == NULL)
+	if ((*box)->next == NULL && (*box) == NULL)
 		return ;
 	first_box = *box;
 	while (first_box->next != NULL)
@@ -32,7 +32,7 @@ void	rev_rota(t_stack **box)
 
 void	rev_rota_pile(t_stack **box)
 {
-	if ((*box)->next || (*box))
+	if ((*box)->next && (*box))
 	{
 		rev_rota(box);
 		action("rr", (*box)->pile);
@@ -47,7 +47,7 @@ void	rev_rota_pile(t_stack **box)
 
 void	rev_rota_all(t_stack **a, t_stack **b)
 {
-	if (((*a)->next || (*a)) && ((*b)->next || (*b)))
+	if (((*a)->next && (*a)) && ((*b)->next && (*b)))
 	{
 		rev_rota(a);
 		rev_rota(b);

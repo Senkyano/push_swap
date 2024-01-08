@@ -18,7 +18,7 @@ void	swap(t_stack **box)
 	t_stack	*sec;
 	t_stack	*third;
 
-	if ((*box) == NULL)
+	if (!(*box) && !(*box)->next)
 		return ;
 	first = *box;
 	sec = first->next;
@@ -45,7 +45,7 @@ void	swap_pile(t_stack **box)
 
 void	swap_all(t_stack **a, t_stack **b)
 {
-	if (((*a)->next || (*a)) && ((*b)->next || (*b)))
+	if (((*a)->next && (*a)) && ((*b)->next && (*b)))
 	{
 		swap(a);
 		swap(b);
