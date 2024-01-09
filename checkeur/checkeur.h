@@ -1,52 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_sort_int_tab.c                                  :+:      :+:    :+:   */
+/*   checkeur.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rihoy <rihoy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/07 13:49:05 by rihoy             #+#    #+#             */
-/*   Updated: 2023/12/14 18:04:59 by rihoy            ###   ########.fr       */
+/*   Created: 2024/01/08 00:32:07 by rihoy             #+#    #+#             */
+/*   Updated: 2024/01/08 00:38:41 by rihoy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef CHECKEUR_H
+# define CHECKEUR_H
+
 #include <unistd.h>
 #include <stdio.h>
+#include <stdlib.h>
 
-int	*ft_sort_int_tab(int *tab, int size)
+typedef struct s_stack
 {
-	int	i;
-	int	j;
+	int	nbr;
+	struct s_stack	*next;
+}	t_stack;
 
-	i = 0;
-	j = 0;
-	while (i < size - 1)
-	{
-		if (tab[i] > tab[i + 1])
-		{
-			j = tab[i];
-			tab[i] = tab[i + 1];
-			tab[i + 1] = j;
-			tab = ft_sort_int_tab(tab, size);
-		}
-		i++;
-	}
-	return (tab);
-}
-
-int main()
-{
-	int t[] = {0,1,2,4,5,1,4,9,8};
-	int i;
-	int	*tab;
-
-	i = 0;
-	tab = ft_sort_int_tab(t,9);
-	while (i < 9)
-	{
-		printf("%d ",t[i]);
-		i++;
-	}
-	
-	return 0;
-}
+#endif

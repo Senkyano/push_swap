@@ -6,7 +6,7 @@
 /*   By: rihoy <rihoy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 10:28:34 by rihoy             #+#    #+#             */
-/*   Updated: 2024/01/02 16:37:07 by rihoy            ###   ########.fr       */
+/*   Updated: 2024/01/09 13:22:22 by rihoy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,17 +122,26 @@ int	chunk_diss(t_stack **a, t_stack **b, t_ref ref, int rev);//algo
 int	rest_taff(t_ref ref, int ind);// utils
 
 
-void	dissection(t_stack **a, t_stack **b, t_ref ref, t_data data);//algo
+void	dissection(t_stack **a, t_stack **b, t_ref ref);//algo
 void	reintegration(t_stack **from, t_stack **to, t_ref ref);
 void	chunk_split(t_stack **from, t_stack **to, t_ref ref);
 t_ref	new_ref_from(t_ref ref);
 t_ref	new_ref_to(t_ref ref);
 void	only_a(t_stack **from, t_stack **to);
 bool	checkeur(t_stack **a, t_ref ref);
-void	reinsert_3(t_stack **from, t_stack **to, t_ref ref);
-void	reinsert_all(t_stack **from, t_stack **to, t_ref ref);
-t_data	trieur(t_stack **from, t_stack **to, t_ref ref);
-void	ecomove(t_stack **from, t_stack **to, t_data data);
+t_ref	mid_lower(t_ref ref);
+t_ref	mid_supsup(t_ref ref);
+t_ref	mid_suplow(t_ref ref);
+void	cuting_part(t_stack **from, t_stack **to, t_ref ref);
+void	all_for(t_stack **from, t_stack **to, t_ref ref);
+void	ecomove(t_stack **from, t_stack **to, t_ref sec, t_ref thr);
+// void	all_for(t_stack **from, t_stack **to, t_ref ref);
+void	trie_four(t_stack **from, t_stack **to, t_ref ref);
+void	do_move(t_stack	**from, t_ref ref);
+void	after_mid(t_stack **a, t_stack **b, t_ref ref);
+void	before_mid(t_stack **a, t_stack **b, t_ref ref);
+void	chunk_diss_bis(t_stack **a, t_stack **b, t_ref ref);
+
 
 // UTILS ALGO
 void	print_tab(t_ref ref);

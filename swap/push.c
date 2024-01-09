@@ -18,7 +18,7 @@ void	push_to(t_stack **from, t_stack **to)
 
 	if ((*from)->pile == 'a')
 		(*from)->pile = 'b';
-	else
+	else if ((*from)->pile == 'b')
 		(*from)->pile = 'a';
 	action("p", (*from)->pile);
 	if (!(*to))
